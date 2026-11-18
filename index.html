@@ -59,7 +59,8 @@ body.clean-ui #draw{pointer-events:none}
 <body>
 <video id="camera" autoplay playsinline muted></video><div id="shade"></div>
 <canvas id="fx"></canvas><canvas id="draw"></canvas>
-<button id="uiToggle" type="button" aria-pressed="false">HIDE INTERFACE</button>\n<div class="shell">
+<button id="uiToggle" type="button" aria-pressed="false">HIDE INTERFACE</button>
+<div class="shell">
 <header><div class="brand"><div class="sigil">✧</div><div><div class="brandname">ARCANA</div><div class="sub">GESTURE-BASED SPELL ENGINE</div></div></div><div class="pill">CAMERA MODE / <span id="camlabel">OFFLINE</span></div></header>
 <main><section class="intro"><div class="eyebrow">✦ YOUR HANDS ARE THE WAND</div><h1>DRAW<br>IT.<br><span>CAST IT.</span></h1><div class="desc">Use your camera to trace a symbol in the air. Pinch your fingers to draw, then release to unleash the spell.</div><div class="instructions"><div class="step"><b>01</b> PINCH TO DRAW</div><div class="step"><b>02</b> TRACE A GLYPH</div><div class="step"><b>03</b> RELEASE TO CAST</div></div></section>
 <aside class="panel"><div class="paneltop"><div class="paneltitle">SPELL GRIMOIRE</div><div class="live">SYSTEM READY</div></div>
@@ -81,12 +82,13 @@ const video=document.getElementById('camera'), draw=document.getElementById('dra
 const ctx=draw.getContext('2d'), fctx=fx.getContext('2d');
 const statusEl=document.getElementById('status'), camlabel=document.getElementById('camlabel'), footerstatus=document.getElementById('footerstatus'), overlay=document.getElementById('startOverlay');
 const begin=document.getElementById('begin'), startBtn=document.getElementById('start'), touchBtn=document.getElementById('touchMode'), uiToggle=document.getElementById('uiToggle');
-let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0;
+let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;
 const colors={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'};
 function setStatus(s){statusEl.textContent=s}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastInference=0;lastRender=0}});
 function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
 function resize(){
- const dpr=Math.min(window.devicePixelRatio||1,2),w=window.innerWidth,h=window.innerHeight;
+ const dpr=Math.min(window.devicePixelRatio||1,window.innerWidth<760?1.35:1.75),w=window.innerWidth,h=window.innerHeight;
  for(const c of [draw,fx]){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.width=w+'px';c.style.height=h+'px'}
  ctx.setTransform(dpr,0,0,dpr,0,0);fctx.setTransform(dpr,0,0,dpr,0,0);
 }
@@ -114,22 +116,22 @@ document.querySelectorAll('.spell').forEach(e=>e.addEventListener('click',()=>{c
 function cast(points){
  if(points.length<2)return;
  const spell=classify(points),cx=points.reduce((a,p)=>a+p.x,0)/points.length,cy=points.reduce((a,p)=>a+p.y,0)/points.length,color=colors[spell],count=spell==='portal'?110:70;
- for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,v=spell==='portal'?1+Math.random()*2:2+Math.random()*6;particles.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,size:2+Math.random()*4,color})}
+ for(let i=0;i<count&&particles.length<220;i++){const a=Math.random()*Math.PI*2,v=spell==='portal'?1+Math.random()*2:2+Math.random()*6;particles.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,size:2+Math.random()*4,color})}
  rings.push({x:cx,y:cy,r:8,life:1,color,kind:spell});
  const names={fire:'FIREBURST IGNITED',shield:'AEGIS SHIELD FORMED',lightning:'THUNDER RELEASED',portal:'VOID GATE OPENED'};
  setStatus(names[spell]);selectSpell(spell);clearPath();
 }
-function renderFX(){
- fctx.clearRect(0,0,innerWidth,innerHeight);
- particles=particles.filter(p=>p.life>0);
- for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;if(p.color===colors.fire)p.vy+=.035;p.life-=.018;fctx.globalAlpha=Math.max(0,p.life);fctx.fillStyle=p.color;fctx.shadowBlur=14;fctx.shadowColor=p.color;fctx.beginPath();fctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);fctx.fill()}
- rings=rings.filter(r=>r.life>0);
- for(const r of rings){r.r+=r.kind==='portal'?2:3.5;r.life-=.02;fctx.globalAlpha=r.life;fctx.strokeStyle=r.color;fctx.lineWidth=3;fctx.shadowBlur=18;fctx.shadowColor=r.color;fctx.beginPath();fctx.arc(r.x,r.y,r.r,0,Math.PI*2);fctx.stroke();if(r.kind==='portal'){fctx.beginPath();fctx.arc(r.x,r.y,r.r*.65,0,Math.PI*2);fctx.stroke()}}
- fctx.globalAlpha=1;requestAnimationFrame(renderFX);
+function renderFX(now){
+ requestAnimationFrame(renderFX);
+ if(document.hidden||now-lastRender<33)return;
+ lastRender=now;fctx.clearRect(0,0,innerWidth,innerHeight);fctx.shadowBlur=0;
+ for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;if(p.color===colors.fire)p.vy+=.035;p.life-=.025;if(p.life<=0){particles.splice(i,1);continue}fctx.globalAlpha=p.life;fctx.fillStyle=p.color;fctx.beginPath();fctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);fctx.fill()}
+ for(let i=rings.length-1;i>=0;i--){const r=rings[i];r.r+=r.kind==='portal'?2:3.5;r.life-=.025;if(r.life<=0){rings.splice(i,1);continue}fctx.globalAlpha=r.life;fctx.strokeStyle=r.color;fctx.lineWidth=3;fctx.beginPath();fctx.arc(r.x,r.y,r.r,0,Math.PI*2);fctx.stroke();if(r.kind==='portal'){fctx.beginPath();fctx.arc(r.x,r.y,r.r*.65,0,Math.PI*2);fctx.stroke()}}
+ fctx.globalAlpha=1;
 }
-renderFX();
+requestAnimationFrame(renderFX);
 function beginStroke(p){drawing=true;path=[p];lastPoint=p;setStatus('Tracing a glyph...');drawPath()}
-function addPoint(p){if(!lastPoint||dist(p,lastPoint)>2.5){path.push(p);lastPoint=p;drawPath()}}
+function addPoint(p){if((!lastPoint||dist(p,lastPoint)>3)&&path.length<420){path.push(p);lastPoint=p;drawPath()}}
 function endStroke(){if(!drawing)return;drawing=false;if(path.length>5)cast(path);else{clearPath();setStatus('Draw a bigger symbol')}}
 function onResults(results){
  if(!running||manualMode)return;
@@ -139,7 +141,7 @@ function onResults(results){
  if(pinch){if(!drawing)beginStroke(p);else addPoint(p)}else if(drawing)endStroke();
 }
 function enableTouchMode(){
- manualMode=true;running=false;
+ manualMode=true;running=false;cancelAnimationFrame(raf);
  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
  video.style.display='none';camlabel.textContent='TOUCH';footerstatus.textContent='TOUCH DRAWING ACTIVE';
  overlay.style.display='none';startBtn.textContent='TOUCH MODE ACTIVE';startBtn.disabled=true;
@@ -161,9 +163,9 @@ async function startCamera(){
   hands=new window.Hands({locateFile:file=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});
   hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.55,minTrackingConfidence:.5});
   hands.onResults(onResults);running=true;
-  const process=async()=>{if(!running||manualMode)return;if(video.readyState>=2&&!frameBusy){frameBusy=true;try{await hands.send({image:video})}catch(err){console.warn('Hand tracking frame failed',err)}finally{frameBusy=false}}raf=requestAnimationFrame(process)};
+  const process=async now=>{if(!running||manualMode)return;if(!document.hidden&&now-lastInference>=42&&video.readyState>=2&&!frameBusy){lastInference=now;frameBusy=true;try{await hands.send({image:video})}catch(err){console.warn('Hand tracking frame failed',err)}finally{frameBusy=false}}raf=requestAnimationFrame(process)};
   await new Promise(resolve=>{if(video.readyState>=2)resolve();else video.addEventListener('loadeddata',resolve,{once:true})});
-  process();overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Pinch thumb + index finger to draw');startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
+  raf=requestAnimationFrame(process);overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Pinch thumb + index finger to draw');startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
  }catch(err){
   console.error(err);running=false;
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
