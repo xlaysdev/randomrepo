@@ -57,6 +57,50 @@
  .title-sprite{width:25%;max-width:25%;flex-basis:25%}
  .art-caption{font-size:7px;margin:0 0 4px}
 }
+
+/* Phone-first portrait VN layout: characters above a readable dialogue panel */
+@media (max-width:700px) and (orientation:portrait){
+ #app{padding:0}
+ #game{width:100%;height:100%;max-height:none;aspect-ratio:auto;border:0;border-radius:0}
+ #scene{inset:0}
+ #characters{inset:0;padding:0 0 34%;align-items:flex-end;justify-content:center}
+ #characters .char{height:63%;width:min(74%,420px);max-width:74%;flex:0 1 74%;margin:0}
+ #characters .char:only-child{height:96%;width:min(78%,440px);max-width:78%;flex-basis:78%}
+ #dialogue{left:3%;right:3%;bottom:max(8px,env(safe-area-inset-bottom));min-height:26%;max-height:34%;padding:21px 14px 19px;overflow:auto}
+ #speaker{top:-17px;left:12px;padding:4px 12px;font-size:12px}
+ #text{font-size:clamp(14px,3.8vw,17px);line-height:1.5;min-height:4.4em;padding:5px 2px 14px}
+ #hint{right:11px;bottom:7px;font-size:9px}
+ #toolbar{left:3%;right:3%;bottom:calc(27% + 17px);justify-content:center;gap:4px}
+ .tool{padding:7px 9px;font-size:10px}
+ #choices{left:5%;right:5%;bottom:31%;gap:7px;max-height:35%;overflow:auto}
+ .choice{padding:11px 10px;font-size:13px}
+ #mobileHint{display:none}
+ #titleScreen{overflow:auto}
+ .title-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(190px,36%);min-height:100%;padding:calc(14px + env(safe-area-inset-top)) 18px calc(12px + env(safe-area-inset-bottom));gap:3px}
+ .title-menu{align-items:center;text-align:center;padding:0}
+ .edition{font-size:8px;margin-bottom:7px}
+ .logo{font-size:clamp(30px,9vw,48px);margin-bottom:7px}
+ .subtitle{font-size:8px;margin-bottom:10px}
+ .menuButtons{width:min(340px,94%);grid-template-columns:1fr 1fr;gap:7px}
+ .menuButtons button{padding:11px 7px;text-align:center;font-size:12px}
+ .menuButtons button:before{margin-right:5px}
+ .menu-foot{display:none}
+ .title-art{min-height:0;height:100%}
+ .titleGirls{height:88%}
+ .title-sprite{width:25%;max-width:25%;flex-basis:25%}
+ .art-caption{font-size:7px;margin:0 0 4px}
+}
+@media (max-width:700px) and (orientation:portrait) and (max-height:650px){
+ #characters{padding-bottom:36%}
+ #characters .char{height:57%}
+ #characters .char:only-child{height:88%}
+ #dialogue{min-height:28%;max-height:36%;padding-top:18px}
+ #toolbar{bottom:calc(29% + 15px)}
+ #choices{bottom:33%}
+ .title-layout{grid-template-rows:auto minmax(140px,30%);padding-top:10px}
+ .titleGirls{height:84%}
+}
+
 </style></head><body>
 <div id="app"><main id="game">
 <div id="scene" class="classroom"><div class="window"></div><div class="window w2"></div><div class="board"></div><div class="desk d1"></div><div class="desk d2"></div></div><div id="characters"></div>
@@ -83,12 +127,13 @@
 </section>
 <div id="toolbar" hidden><button class="tool" id="historyBtn">History</button><button class="tool" id="skipBtn">Skip</button><button class="tool" id="autoBtn">Auto</button><button class="tool" id="saveBtn">Save</button><button class="tool" id="loadBtn">Load</button><button class="tool" id="settingsBtn">Settings</button><button class="tool" id="menuBtn">Menu</button></div><div id="choices" hidden></div><div id="dialogue" hidden role="button" tabindex="0" aria-label="Advance dialogue"><div id="speaker"></div><div id="text"></div><div id="hint">CLICK / TAP TO CONTINUE ▸</div></div><div id="overlay"><div class="panel" id="panel"></div></div><div id="mobileHint">TAP THE DIALOGUE TO CONTINUE</div>
 </main></div>
+<audio id="bgm" loop preload="none"></audio>
 <script>
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id);
 const names={sayori:'Sayori',natsuki:'Natsuki',yuri:'Yuri',monika:'Monika'};
-const state={line:0,auto:false,typing:false,fullText:'',timer:null,history:[],settings:{speed:32,auto:2.2}};
+const state={line:0,auto:false,typing:false,fullText:'',timer:null,history:[],settings:{speed:32,auto:2.2,music:true,volume:.35}};
 let assets={};
 let story=[
 {act:1,bg:'classroom',who:'Sayori',char:'sayori',file:'1r.png',text:'There you are! I was beginning to think you had forgotten our walk to school.' ,next:1},
@@ -130,6 +175,9 @@ let story=[
 ];
 const sourceOrder=['ch0.txt','ch1.txt','ch2.txt','ch3.txt','ch4.txt','ch5.txt','ch10.txt','ch20.txt','ch21.txt','ch22.txt','ch23.txt','ch40.txt','sayori.txt','natsuki.txt','natsuki2.txt','yuri.txt','yuri2.txt'];
 let dialogueLoadPromise=null;
+const bgmTracks={classroom:'day',hallway:'day',clubroom:'club',sunset:'sunset',glitch:'tense'};
+function playSceneMusic(scene){const audio=$('bgm');if(!audio||!state.settings.music)return;const track=bgmTracks[scene]||'day';const base='assets/audio/'+track;const wanted=base+'.ogg';if(audio.dataset.track===track&& !audio.paused)return;audio.dataset.track=track;audio.volume=state.settings.volume;audio.onerror=()=>{if(!audio.dataset.fallback){audio.dataset.fallback='1';audio.src=base+'.mp3';audio.play().catch(()=>{})}};audio.oncanplay=()=>{audio.dataset.fallback='';};audio.src=wanted;audio.load();audio.play().catch(()=>{});}
+function applyMusicSettings(){const audio=$('bgm');if(!audio)return;audio.volume=state.settings.volume;if(!state.settings.music){audio.pause();return;}const line=story[state.line];if(line)playSceneMusic(line.bg);}
 const speakerMap={s:'Sayori',m:'Monika',n:'Natsuki',y:'Yuri',mc:'You'};
 async function loadFullDialogue(){
  try{
@@ -178,22 +226,22 @@ function makeSprite(ch,pose='1',expression='a',className='char'){const wrap=docu
 function buildTitleGirls(){const box=$('titleGirls');box.innerHTML='';['sayori','yuri','natsuki','monika'].forEach(ch=>{const sprite=makeSprite(ch,'1','a','title-sprite');box.append(sprite)})}
 function loadAssets(){dialogueLoadPromise=loadFullDialogue();fetch('assets/sprite-index.json').then(r=>{if(!r.ok)throw Error('Sprite index unavailable');return r.json()}).then(data=>{const list=Array.isArray(data)?data:(data.files||data.sprites||[]);for(const ch of Object.keys(names))assets[ch]=list.filter(x=>x.character===ch&&x.file&&/\.png$/i.test(x.file)).map(x=>x.file.split('/').pop());buildTitleGirls();renderCharacters(story[state.line]?.char,story[state.line]?.file)}).catch(err=>{console.error('Could not load sprite index:',err);for(const ch of Object.keys(names))assets[ch]=[];buildTitleGirls()})}
 function renderCharacters(ch,file,expression='a'){const box=$('characters');box.innerHTML='';if(!ch)return;const match=String(file||'1r.png').match(/^([12])(?:l|r)?\.png$/i);const pose=match?match[1]:(file||'1');box.append(makeSprite(ch,pose,expression,'char'))}
-function showTitle(){$('titleScreen').style.display='flex';$('toolbar').hidden=true;$('dialogue').hidden=true;$('choices').hidden=true;$('characters').innerHTML='';$('continueGame').disabled=!localStorage.getItem('litclub-save');$('continueGame').style.opacity=$('continueGame').disabled?'.45':'1'}
+function showTitle(){$('bgm').pause();$('titleScreen').style.display='flex';$('toolbar').hidden=true;$('dialogue').hidden=true;$('choices').hidden=true;$('characters').innerHTML='';$('continueGame').disabled=!localStorage.getItem('litclub-save');$('continueGame').style.opacity=$('continueGame').disabled?'.45':'1'}
 function showGame(){$('titleScreen').style.display='none';$('toolbar').hidden=false;$('dialogue').hidden=false}
 function start(){state.line=0;state.history=[];showGame();showLine(0)}
-function showLine(index){clearTimeout(state.timer);state.line=index;const line=story[index]||story.at(-1);$('scene').className=(line.bg==='glitch'?'glitch':'')+' '+(line.bg||'classroom');$('game').classList.toggle('act-dark',line.act===2||line.act===3);$('speaker').textContent=line.who||'';$('text').textContent='';$('choices').hidden=true;renderCharacters(line.char,line.file,line.expression||'a');state.fullText=line.text;state.typing=true;let i=0;const type=()=>{if(!state.typing)return;i=Math.min(i+Math.max(1,Math.round(42/state.settings.speed)),state.fullText.length);$('text').textContent=state.fullText.slice(0,i);if(i<state.fullText.length)state.timer=setTimeout(type,state.settings.speed);else{state.typing=false;state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000)}};type()}
+function showLine(index){clearTimeout(state.timer);state.line=index;const line=story[index]||story.at(-1);$('scene').className=(line.bg==='glitch'?'glitch':'')+' '+(line.bg||'classroom');playSceneMusic(line.bg||'classroom');$('game').classList.toggle('act-dark',line.act===2||line.act===3);$('speaker').textContent=line.who||'';$('text').textContent='';$('choices').hidden=true;renderCharacters(line.char,line.file,line.expression||'a');state.fullText=line.text;state.typing=true;let i=0;const type=()=>{if(!state.typing)return;i=Math.min(i+Math.max(1,Math.round(42/state.settings.speed)),state.fullText.length);$('text').textContent=state.fullText.slice(0,i);if(i<state.fullText.length)state.timer=setTimeout(type,state.settings.speed);else{state.typing=false;state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000)}};type()}
 function showChoices(choices){const box=$('choices');box.innerHTML='';box.hidden=false;choices.forEach(c=>{const b=document.createElement('button');b.className='choice';b.textContent=c.label;b.onclick=e=>{e.stopPropagation();box.hidden=true;showLine(c.to)};box.append(b)})}
 function advance(){if($('titleScreen').style.display!=='none'||!$('choices').hidden)return;if(state.typing){state.typing=false;clearTimeout(state.timer);$('text').textContent=state.fullText;const line=story[state.line];state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000);return}const line=story[state.line];if(line&&line.next!==undefined)showLine(line.next)}
 function saveGame(slot=0){const data={line:state.line,history:state.history,at:Date.now()};try{localStorage.setItem('litclub-save'+slot,JSON.stringify(data));if(slot===0)localStorage.setItem('litclub-save',JSON.stringify(data));return true}catch(e){return false}}
 function loadGame(slot=0){const raw=localStorage.getItem('litclub-save'+slot)||(slot===0?localStorage.getItem('litclub-save'):null);if(!raw)return false;try{const d=JSON.parse(raw);state.history=d.history||[];showGame();showLine(Math.max(0,Math.min(story.length-1,d.line||0)));return true}catch(e){return false}}
 function openPanel(kind){clearTimeout(state.timer);const p=$('panel');let body='';if(kind==='menu')body='<h2>Game Menu</h2><button data-action="return">Return</button><button data-action="save">Save Game</button><button data-action="load">Load Game</button><button data-action="settings">Settings</button><button data-action="title">Main Menu</button>';
 if(kind==='save'||kind==='load'){body='<h2>'+(kind==='save'?'Save Game':'Load Game')+'</h2><p>Choose a slot. Progress is stored on this device.</p>';for(let i=0;i<6;i++){const raw=localStorage.getItem('litclub-save'+i);let label='Empty slot';try{const d=JSON.parse(raw);label='Chapter '+(d.line+1)+' · '+new Date(d.at).toLocaleString()}catch(e){}body+='<div class="slot"><div><b>Slot '+(i+1)+'</b><small>'+label+'</small></div><button data-slot="'+i+'" data-kind="'+kind+'">'+(kind==='save'?'Save':'Load')+'</button></div>'}}
-if(kind==='settings')body='<h2>Settings</h2><p>Text speed <input id="speedSetting" type="range" min="8" max="65" value="'+state.settings.speed+'"></p><p>Auto advance delay <input id="autoSetting" type="range" min="1" max="6" step=".5" value="'+state.settings.auto+'"></p><p>Keyboard: Enter / Space advances · Esc opens menu · F toggles fullscreen.</p>';
+if(kind==='settings')body='<h2>Settings</h2><p>Text speed <input id="speedSetting" type="range" min="8" max="65" value="'+state.settings.speed+'"></p><p>Auto advance delay <input id="autoSetting" type="range" min="1" max="6" step=".5" value="'+state.settings.auto+'"></p><p><label><input id="musicSetting" type="checkbox" '+(state.settings.music?'checked':'')+'> Background music</label></p><p>Music volume <input id="volumeSetting" type="range" min="0" max="1" step=".05" value="'+state.settings.volume+'"></p><p>Keyboard: Enter / Space advances · Esc opens menu · F toggles fullscreen.</p>';
 if(kind==='history')body='<h2>History</h2>'+(state.history.length?state.history.slice(-30).map(x=>'<p><b>'+escapeHtml(x.who)+'</b><br>'+escapeHtml(x.text)+'</p>').join(''):'<p>No dialogue history yet.</p>');
 p.innerHTML=body+'<div style="text-align:right;margin-top:12px"><button data-action="close">Close</button></div>';$('overlay').style.display='flex';
 p.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>{const a=b.dataset.action;if(a==='return'||a==='close')closePanel();if(a==='save'||a==='load')openPanel(a);if(a==='settings')openPanel('settings');if(a==='title'){closePanel();showTitle()}});
 p.querySelectorAll('[data-slot]').forEach(b=>b.onclick=()=>{const slot=+b.dataset.slot;if(b.dataset.kind==='save'){if(saveGame(slot)){closePanel();toast('Game saved!')}else toast('Could not save on this device.')}else{if(loadGame(slot))closePanel();else toast('That slot is empty.')}});
-const s=$('speedSetting');if(s)s.oninput=()=>state.settings.speed=+s.value;const a=$('autoSetting');if(a)a.oninput=()=>state.settings.auto=+a.value}
+const s=$('speedSetting');if(s)s.oninput=()=>state.settings.speed=+s.value;const a=$('autoSetting');if(a)a.oninput=()=>state.settings.auto=+a.value;const m=$('musicSetting');if(m)m.onchange=()=>{state.settings.music=m.checked;applyMusicSettings()};const v=$('volumeSetting');if(v)v.oninput=()=>{state.settings.volume=+v.value;applyMusicSettings()}}
 function closePanel(){$('overlay').style.display='none';if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000)}
 function toast(msg){const h=$('hint');h.textContent=msg.toUpperCase();setTimeout(()=>h.textContent='CLICK / TAP TO CONTINUE ▸',1500)}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
