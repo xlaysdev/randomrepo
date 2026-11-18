@@ -82,7 +82,7 @@ const video=document.getElementById('camera'), draw=document.getElementById('dra
 const ctx=draw.getContext('2d'), fctx=fx.getContext('2d');
 const statusEl=document.getElementById('status'), camlabel=document.getElementById('camlabel'), footerstatus=document.getElementById('footerstatus'), overlay=document.getElementById('startOverlay');
 const begin=document.getElementById('begin'), startBtn=document.getElementById('start'), touchBtn=document.getElementById('touchMode'), uiToggle=document.getElementById('uiToggle');
-let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;
+let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;\nlet smoothedTip=null,pinchOnFrames=0,pinchOffFrames=0,missingSince=0,lastHandSeen=0;
 const colors={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'};
 function setStatus(s){statusEl.textContent=s}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastInference=0;lastRender=0}});
@@ -136,9 +136,35 @@ function endStroke(){if(!drawing)return;drawing=false;if(path.length>5)cast(path
 function onResults(results){
  if(!running||manualMode)return;
  const lm=results.multiHandLandmarks&&results.multiHandLandmarks[0];
- if(!lm){if(drawing)endStroke();return}
- const pinch=dist(lm[4],lm[8])<.075,p={x:(1-lm[8].x)*innerWidth,y:lm[8].y*innerHeight};
- if(pinch){if(!drawing)beginStroke(p);else addPoint(p)}else if(drawing)endStroke();
+ const now=performance.now();
+ if(!lm){
+  pinchOnFrames=0;pinchOffFrames=0;
+  if(!missingSince)missingSince=now;
+  if(drawing&&now-missingSince>180){endStroke();smoothedTip=null;setStatus('Hand lost — show it to the camera');}
+  else if(!drawing&&now-lastHandSeen>700)setStatus('Show your hand to the camera');
+  return;
+ }
+ missingSince=0;lastHandSeen=now;
+ // Scale pinch distance against palm width so it works at different camera distances.
+ const palmWidth=Math.max(dist(lm[5],lm[17]),0.001);
+ const pinchRatio=dist(lm[4],lm[8])/palmWidth;
+ const pinch= drawing ? pinchRatio<0.48 : pinchRatio<0.32;
+ const raw={x:(1-lm[8].x)*innerWidth,y:lm[8].y*innerHeight};
+ // Smooth fingertip jitter while keeping faster movements responsive.
+ if(!smoothedTip)smoothedTip=raw;
+ else{
+  const movement=dist(raw,smoothedTip);
+  const alpha=movement>24?0.68:movement>8?0.48:0.30;
+  smoothedTip={x:smoothedTip.x+(raw.x-smoothedTip.x)*alpha,y:smoothedTip.y+(raw.y-smoothedTip.y)*alpha};
+ }
+ if(pinch){
+  pinchOffFrames=0;pinchOnFrames++;
+  if(!drawing&&pinchOnFrames>=2){beginStroke(smoothedTip);pinchOnFrames=0}
+  else if(drawing)addPoint(smoothedTip);
+ }else{
+  pinchOnFrames=0;
+  if(drawing){pinchOffFrames++;if(pinchOffFrames>=2){pinchOffFrames=0;endStroke()}}
+ }
 }
 function enableTouchMode(){
  manualMode=true;running=false;cancelAnimationFrame(raf);
@@ -161,11 +187,11 @@ async function startCamera(){
   stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'user'},width:{ideal:640},height:{ideal:480}}});
   video.srcObject=stream;video.muted=true;video.playsInline=true;await video.play();
   hands=new window.Hands({locateFile:file=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});
-  hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.55,minTrackingConfidence:.5});
+  hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.65,minTrackingConfidence:.65});
   hands.onResults(onResults);running=true;
   const process=async now=>{if(!running||manualMode)return;if(!document.hidden&&now-lastInference>=42&&video.readyState>=2&&!frameBusy){lastInference=now;frameBusy=true;try{await hands.send({image:video})}catch(err){console.warn('Hand tracking frame failed',err)}finally{frameBusy=false}}raf=requestAnimationFrame(process)};
   await new Promise(resolve=>{if(video.readyState>=2)resolve();else video.addEventListener('loadeddata',resolve,{once:true})});
-  raf=requestAnimationFrame(process);overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Pinch thumb + index finger to draw');startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
+  raf=requestAnimationFrame(process);overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Show your hand, then pinch thumb + index finger');smoothedTip=null;pinchOnFrames=0;pinchOffFrames=0;missingSince=0;lastHandSeen=0;startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
  }catch(err){
   console.error(err);running=false;
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
