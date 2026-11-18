@@ -1,0 +1,1892 @@
+[
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 145496
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/1l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "1l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 174712
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/1r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "1r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 251125
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/2l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "2l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 185617
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/2r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "2r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 256874
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/3a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "3a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 468607
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/3b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "3b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 468967
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148514
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 149670
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/c.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "c.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148699
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/d.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "d.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148864
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/e.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "e.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148230
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/f.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "f.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148418
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/g.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "g.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148579
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/g1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "g1.png",
+    "width": 623,
+    "height": 982,
+    "bytes": 501839
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/g2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "g2.png",
+    "width": 720,
+    "height": 960,
+    "bytes": 518598
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/g3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "g3.png",
+    "width": 720,
+    "height": 960,
+    "bytes": 520610
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/g4.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "g4.png",
+    "width": 720,
+    "height": 960,
+    "bytes": 521274
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/h.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "h.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148159
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/i.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "i.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148324
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/j.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "j.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 145610
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/k.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "k.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 146718
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 147142
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/m.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "m.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148073
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/MonikaSpritesheet.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "MonikaSpritesheet.png",
+    "width": 8640,
+    "height": 960,
+    "bytes": 977740
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/n.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "n.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 149214
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/o.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "o.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148252
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/p.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "p.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148429
+  },
+  {
+    "character": "monika",
+    "file": "assets/characters/monika/q.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Monika.zip",
+    "source_path": "q.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 145323
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/ghost_blood.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "ghost_blood.png",
+    "width": 115,
+    "height": 85,
+    "bytes": 20380
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/ghost1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "ghost1.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 390188
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/ghost2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "ghost2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 392654
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/ghost3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "ghost3.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 387656
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/glitch1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "glitch1.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 394153
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/h.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "h.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 170138
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/i.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "i.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 169656
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/j.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "j.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167326
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/k.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "k.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167419
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 168493
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/m.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "m.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167772
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/mouth.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "mouth.png",
+    "width": 55,
+    "height": 37,
+    "bytes": 22433
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/n.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "n.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 169709
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/o.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "o.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 170326
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/p.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "p.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 171047
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/q.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "q.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 170048
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 170496
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/s.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "s.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 169583
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/scream.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "scream.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 174827
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/t.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "t.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 171114
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/u.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "u.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 169602
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/v.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "v.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 166194
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/vomit.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "vomit.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 371047
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/w.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "w.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 166684
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/x.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "x.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 166645
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/y.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "y.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167285
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/z.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "z.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 164655
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/0.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "0.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 174759
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/1bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "1bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 111069
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/1br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "1br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 129648
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/1l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "1l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 127053
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/1r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "1r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 151865
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/1t.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "1t.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167387
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 107842
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 123881
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bt.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bt.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 164479
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bta.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bta.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 164485
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2btb.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2btb.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 156416
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2btc.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2btc.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157191
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2btd.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2btd.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 156518
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bte.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bte.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157167
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2btf.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2btf.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157247
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2btg.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2btg.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 158630
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bth.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bth.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 159174
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2bti.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2bti.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 159820
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 129019
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 153232
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2t.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2t.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 165222
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2ta.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2ta.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 165234
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2tb.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2tb.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 156738
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2tc.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2tc.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157518
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2td.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2td.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 156844
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2te.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2te.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157492
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2tf.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2tf.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 157570
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2tg.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2tg.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 158952
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2th.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2th.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 159501
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/2ti.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "2ti.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 160150
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "3.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 197468
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/3b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "3b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 175126
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167387
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167951
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/blackeyes.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "blackeyes.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 28885
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/c.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "c.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167476
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/d.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "d.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 168546
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/e.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "e.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167967
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/eye.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "eye.png",
+    "width": 46,
+    "height": 46,
+    "bytes": 18945
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/f.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "f.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167925
+  },
+  {
+    "character": "natsuki",
+    "file": "assets/characters/natsuki/g.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Natsuki.zip",
+    "source_path": "g.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 167265
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/y.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "y.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 143028
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/1bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "1bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 132643
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/1br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "1br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 148573
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/1l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "1l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 171159
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/1r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "1r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 199128
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/2bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "2bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 115381
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/2br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "2br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 123073
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/2l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "2l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 151954
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/2r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "2r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 166675
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/3a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "3a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 366093
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/3b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "3b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 365624
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/3c.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "3c.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 365612
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/3d.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "3d.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 365159
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140516
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140473
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/c.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "c.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141258
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/d.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "d.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140773
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/e.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "e.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 143169
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/end-glitch1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "end-glitch1.png",
+    "width": 651,
+    "height": 893,
+    "bytes": 399180
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/end-glitch2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "end-glitch2.png",
+    "width": 651,
+    "height": 893,
+    "bytes": 398209
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/f.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "f.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 139835
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/g.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "g.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 139861
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/glitch1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "glitch1.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 518181
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/glitch2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "glitch2.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 352571
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/h.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "h.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140654
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/i.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "i.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140333
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/j.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "j.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141110
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/k.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "k.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140303
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141814
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/m.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "m.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141737
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/n.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "n.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140609
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/noface1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "noface1.png",
+    "width": 340,
+    "height": 315,
+    "bytes": 67826
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/noface1b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "noface1b.png",
+    "width": 340,
+    "height": 315,
+    "bytes": 64130
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/noface2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "noface2.png",
+    "width": 270,
+    "height": 282,
+    "bytes": 43757
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/o.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "o.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140485
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/p.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "p.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 137123
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/q.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "q.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 136624
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 137849
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/s.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "s.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140357
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/t.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "t.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140887
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/u.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "u.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 140803
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/v.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "v.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 143372
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/w.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "w.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141954
+  },
+  {
+    "character": "sayori",
+    "file": "assets/characters/sayori/x.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Sayori.zip",
+    "source_path": "x.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 141643
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/zd.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "zd.png",
+    "width": 264,
+    "height": 279,
+    "bytes": 94192
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/0a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "0a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 427029
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/0b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "0b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 424684
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/1bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "1bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 94865
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/1br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "1br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 270899
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/1l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "1l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 72399
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/1r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "1r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 259534
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/2bl.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "2bl.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 103604
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/2br.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "2br.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 281410
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/2l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "2l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 80744
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/2r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "2r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 244296
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "3.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 384774
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/3b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "3b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 350310
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/a.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "a.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110670
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/a2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "a2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 111751
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/b.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "b.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110949
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/b2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "b2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 111603
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/c.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "c.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 108117
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/c2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "c2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110790
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/cuts.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "cuts.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 471012
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/d.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "d.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 108537
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/d2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "d2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 113507
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/dragon1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "dragon1.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 126698
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/dragon2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "dragon2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 169211
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/e.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "e.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110621
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/e2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "e2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131885
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/eyes1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "eyes1.png",
+    "width": 1280,
+    "height": 720,
+    "bytes": 404542
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/eyes2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "eyes2.png",
+    "width": 1280,
+    "height": 720,
+    "bytes": 28697
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/eyesfull.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "eyesfull.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 430252
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/f.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "f.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110717
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/g.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "g.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130248
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/glitch1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "glitch1.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 243548
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/glitch2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "glitch2.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 396787
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/glitch3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "glitch3.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 266590
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/glitch4.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "glitch4.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 318057
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/glitch5.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "glitch5.png",
+    "width": 894,
+    "height": 894,
+    "bytes": 356154
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/h.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "h.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130489
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/hisui.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "hisui.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 111128
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/i.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "i.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130480
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/j.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "j.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130969
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/k.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "k.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 127634
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/k-old.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "k-old.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 107244
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/l.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "l.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 128070
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/l-old.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "l-old.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 107611
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/m.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "m.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 128248
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/m-old.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "m-old.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 107800
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/n.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "n.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110271
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/o.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "o.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 109681
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/oneeye.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "oneeye.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 129288
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/oneeye2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "oneeye2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 27844
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/p.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "p.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 110609
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/q.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "q.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 109973
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/r.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "r.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131753
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/s.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "s.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130119
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/t.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "t.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130103
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/u.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "u.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 129710
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/v.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "v.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130079
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/w.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "w.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 128755
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/w-old.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "w-old.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 126428
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y1.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y1.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131471
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y2.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y2.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 130798
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y3.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y3.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 132087
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y4.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y4.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131157
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y5.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y5.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131840
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y6.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y6.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 131054
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/y7.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "y7.png",
+    "width": 960,
+    "height": 960,
+    "bytes": 132056
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/za.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "za.png",
+    "width": 264,
+    "height": 279,
+    "bytes": 94405
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/zb.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "zb.png",
+    "width": 264,
+    "height": 279,
+    "bytes": 94821
+  },
+  {
+    "character": "yuri",
+    "file": "assets/characters/yuri/zc.png",
+    "source_zip": "PC _ Computer - Doki Doki Literature Club - Characters - Yuri.zip",
+    "source_path": "zc.png",
+    "width": 264,
+    "height": 279,
+    "bytes": 93352
+  }
+]
