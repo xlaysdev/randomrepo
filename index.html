@@ -1,89 +1,77 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WHAT IF IT WAS 2X?</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARCANA — Gesture Spellcasting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090b13;color:#f6f7fb;font-family:'Space Grotesk',sans-serif}
-#scene{position:fixed;inset:0}canvas{display:block}
-.hud{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,4vw,54px)}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
-.kicker{font:500 11px 'DM Mono',monospace;letter-spacing:.22em;color:#9ba5bd;text-transform:uppercase}
-h1{font-size:clamp(42px,8vw,104px);line-height:.86;letter-spacing:-.075em;margin:13px 0 0;font-weight:700;text-transform:uppercase}
-h1 span{color:#e8ff55}
-.tag{border:1px solid #34394b;border-radius:99px;padding:10px 14px;font:11px 'DM Mono',monospace;color:#c6cadd;letter-spacing:.08em;white-space:nowrap;background:#11152299}
-.bottom{display:flex;justify-content:space-between;align-items:end;gap:20px}
-.caption{font-size:clamp(13px,1.6vw,17px);color:#aab1c4;max-width:330px;line-height:1.5}
-.meter{width:min(230px,35vw);text-align:right}
-.meter-label{font:10px 'DM Mono',monospace;color:#9ba5bd;letter-spacing:.15em}
-.meter strong{display:block;font-size:clamp(28px,4vw,48px);letter-spacing:-.06em;color:#e8ff55}
-.bar{height:5px;background:#262b3b;border-radius:9px;margin-top:9px;overflow:hidden}
-.bar i{display:block;width:100%;height:100%;background:#e8ff55;transform-origin:left;animation:pulse 2s ease-in-out infinite alternate}
-@keyframes pulse{from{transform:scaleX(.72)}to{transform:scaleX(1)}}
-@media(max-width:600px){.hud{padding:22px}.top{display:block}.tag{display:inline-block;margin-top:20px}h1{font-size:clamp(46px,14vw,76px)}.bottom{align-items:end}.caption{max-width:180px}.meter{width:130px}}
+:root{--bg:#080a12;--panel:#111522;--line:#272d40;--text:#f4f4fb;--muted:#8e96ad;--aqua:#70f5db;--violet:#a88bff;--gold:#ffd36b}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif}
+body{background:radial-gradient(ellipse at 50% 45%,#172039 0%,#0a0d18 55%,#070910 100%)}
+#camera{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:.42;filter:saturate(.65) contrast(1.12)}
+#shade{position:fixed;inset:0;background:linear-gradient(90deg,#080a12e8 0%,#080a1280 35%,#080a1240 70%,#080a12b8 100%),linear-gradient(0deg,#080a12 0%,transparent 30%,transparent 75%,#080a12aa 100%)}
+#fx,#draw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#draw{pointer-events:auto;touch-action:none;cursor:crosshair}
+.shell{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,42px);pointer-events:none}
+header,.footer{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}.sigil{width:38px;height:38px;border:1px solid #70f5db88;border-radius:50%;display:grid;place-items:center;color:var(--aqua);font-size:22px;box-shadow:0 0 28px #70f5db20}
+.brandname{font-size:13px;letter-spacing:.24em;font-weight:700}.sub{font:10px 'DM Mono';color:var(--muted);letter-spacing:.16em;margin-top:4px}
+.pill{border:1px solid var(--line);background:#0b0e19bb;border-radius:30px;padding:9px 13px;color:#c3c9d8;font:10px 'DM Mono';letter-spacing:.12em}
+main{display:flex;align-items:center;justify-content:space-between;gap:24px;flex:1}
+.intro{max-width:430px;pointer-events:none}.eyebrow{font:11px 'DM Mono';letter-spacing:.2em;color:var(--aqua);text-transform:uppercase}
+h1{font-size:clamp(48px,8vw,100px);line-height:.84;letter-spacing:-.085em;margin:16px 0 20px;font-weight:700}
+h1 span{color:var(--aqua)}.desc{max-width:330px;color:#aab1c4;font-size:15px;line-height:1.6}
+.instructions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.step{border:1px solid #30364b;background:#101522aa;padding:11px 13px;border-radius:12px;font-size:11px;color:#c7ccda}.step b{color:var(--aqua);font:11px 'DM Mono';margin-right:7px}
+.panel{width:min(310px,32vw);min-width:245px;padding:18px;border:1px solid #343b50;background:#0c101bdc;backdrop-filter:blur(18px);border-radius:18px;box-shadow:0 20px 80px #0005;pointer-events:auto}
+.paneltop{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.paneltitle{font:11px 'DM Mono';letter-spacing:.16em;color:#cbd1e0}.live{font:9px 'DM Mono';color:var(--aqua);letter-spacing:.12em}.live:before{content:'';display:inline-block;width:6px;height:6px;background:var(--aqua);border-radius:50%;margin-right:7px;box-shadow:0 0 10px var(--aqua)}
+.spell{display:flex;align-items:center;gap:12px;padding:11px;border:1px solid transparent;border-radius:12px;margin:5px 0;transition:.2s}.spell.active{border-color:#70f5db66;background:#70f5db0d}.glyph{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:#ffffff0a}.spell strong{display:block;font-size:13px}.spell small{display:block;color:var(--muted);font:9px 'DM Mono';margin-top:4px;letter-spacing:.08em}
+.status{margin-top:14px;padding:13px;border-radius:12px;background:#070a12;border:1px solid #242a3b}.statuslabel{font:9px 'DM Mono';letter-spacing:.15em;color:var(--muted)}#status{font-size:13px;margin-top:7px;color:var(--aqua)}
+button{border:0;border-radius:10px;padding:12px 14px;background:var(--aqua);color:#07110f;font:700 11px 'DM Mono';letter-spacing:.1em;cursor:pointer;width:100%;margin-top:12px}button:disabled{opacity:.5;cursor:wait}
+.footer{font:10px 'DM Mono';letter-spacing:.12em;color:#8790a8}.hint{color:#c1c8d9}.cameraState{display:flex;align-items:center;gap:8px}
+#startOverlay{position:fixed;inset:0;display:grid;place-items:center;background:#080a12b8;backdrop-filter:blur(10px);z-index:5}
+.startbox{width:min(420px,calc(100% - 36px));padding:30px;border:1px solid #343b50;background:#101522;border-radius:20px;text-align:center;box-shadow:0 30px 100px #0009}
+.starticon{font-size:38px;color:var(--aqua)}.startbox h2{font-size:27px;letter-spacing:-.05em;margin:12px 0 8px}.startbox p{font-size:13px;color:#aab1c4;line-height:1.6}.startbox button{padding:15px}
+@media(max-width:760px){.shell{padding:18px}main{align-items:flex-end;padding-bottom:20px}.intro{max-width:55%}h1{font-size:clamp(43px,12vw,70px)}.desc{font-size:12px}.instructions{display:none}.panel{width:42%;min-width:0;padding:11px}.spell{gap:7px;padding:7px}.glyph{width:29px;height:29px;font-size:16px}.spell strong{font-size:11px}.spell small{font-size:8px}.status{padding:9px}#status{font-size:11px}.pill{font-size:8px}.footer{font-size:8px}}
+@media(max-width:430px){main{gap:8px}.intro{max-width:51%}.panel{width:46%}.desc{max-width:190px}.sub{font-size:8px}}
 </style>
 </head>
 <body>
-<div id="scene"></div>
-<div class="hud">
- <div class="top">
-  <div><div class="kicker">A completely unnecessary experiment</div><h1>WHAT IF<br>IT WAS<br><span>2X MORE?</span></h1></div>
-  <div class="tag">HYPOTHETICAL LAB / 001</div>
- </div>
- <div class="bottom">
-  <div class="caption">Nobody asked for this simulation.<br>We made it anyway.</div>
-  <div class="meter"><div class="meter-label">FLOW INTENSITY</div><strong>200%</strong><div class="bar"><i></i></div></div>
- </div>
+<video id="camera" autoplay playsinline muted></video><div id="shade"></div>
+<canvas id="fx"></canvas><canvas id="draw"></canvas>
+<div class="shell">
+<header><div class="brand"><div class="sigil">✧</div><div><div class="brandname">ARCANA</div><div class="sub">GESTURE-BASED SPELL ENGINE</div></div></div><div class="pill">CAMERA MODE / <span id="camlabel">OFFLINE</span></div></header>
+<main><section class="intro"><div class="eyebrow">✦ YOUR HANDS ARE THE WAND</div><h1>DRAW<br>IT.<br><span>CAST IT.</span></h1><div class="desc">Use your camera to trace a symbol in the air. Pinch your fingers to draw, then release to unleash the spell.</div><div class="instructions"><div class="step"><b>01</b> PINCH TO DRAW</div><div class="step"><b>02</b> TRACE A GLYPH</div><div class="step"><b>03</b> RELEASE TO CAST</div></div></section>
+<aside class="panel"><div class="paneltop"><div class="paneltitle">SPELL GRIMOIRE</div><div class="live">SYSTEM READY</div></div>
+<div class="spell active" data-spell="fire"><div class="glyph">🔥</div><div><strong>Fireburst</strong><small>ZIGZAG / LIGHTNING</small></div></div>
+<div class="spell" data-spell="shield"><div class="glyph">🛡️</div><div><strong>Aegis</strong><small>CIRCLE / LOOP</small></div></div>
+<div class="spell" data-spell="lightning"><div class="glyph">⚡</div><div><strong>Thunder</strong><small>SHARP V / ZIGZAG</small></div></div>
+<div class="spell" data-spell="portal"><div class="glyph">🌀</div><div><strong>Void Gate</strong><small>SPIRAL / BIG LOOP</small></div></div>
+<div class="status"><div class="statuslabel">CURRENT ACTION</div><div id="status">Waiting for camera...</div></div>
+<button id="start" type="button">ACTIVATE CAMERA</button>
+</aside></main>
+<div class="footer"><div class="cameraState"><span>◉</span><span id="footerstatus">CAMERA NOT CONNECTED</span></div><div class="hint">NO WAND REQUIRED ✦</div></div>
 </div>
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-const host=document.querySelector('#scene');
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x090b13);scene.fog=new THREE.Fog(0x090b13,9,22);
-const camera=new THREE.PerspectiveCamera(34,innerWidth/innerHeight,.1,100);camera.position.set(6,5.1,8.5);camera.lookAt(0,1.45,0);
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;host.appendChild(renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xb9d5ff,0x17101d,2));
-const key=new THREE.DirectionalLight(0xffffff,3.5);key.position.set(4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);scene.add(key);
-const pink=new THREE.PointLight(0xff4d9a,18,10);pink.position.set(-4,3,1);scene.add(pink);
-const lime=new THREE.PointLight(0xdfff57,15,8);lime.position.set(2,4,-3);scene.add(lime);
-const mat=(color,metalness=0,roughness=.35)=>new THREE.MeshStandardMaterial({color,metalness,roughness});
-const porcelain=mat(0xf0f2f6,.08,.19), dark=mat(0x171c2a,.25,.3), chrome=mat(0x9ca9bc,.85,.18), floorMat=mat(0x151a28,.25,.55);
-const floor=new THREE.Mesh(new THREE.CircleGeometry(20,80),floorMat);floor.rotation.x=-Math.PI/2;floor.position.y=-.04;floor.receiveShadow=true;scene.add(floor);
-const grid=new THREE.GridHelper(30,40,0x343b50,0x202638);grid.position.y=-.025;scene.add(grid);
-const toilet=new THREE.Group();scene.add(toilet);
-const base=new THREE.Mesh(new THREE.CylinderGeometry(.62,.78,1.45,48,1,true),porcelain);base.position.set(0,.78,0);base.castShadow=true;base.receiveShadow=true;toilet.add(base);
-const foot=new THREE.Mesh(new THREE.CylinderGeometry(.65,.68,.18,48),porcelain);foot.position.y=.12;foot.castShadow=true;toilet.add(foot);
-const bowl=new THREE.Mesh(new THREE.SphereGeometry(1,64,40),porcelain);bowl.scale.set(1.08,.48,1.2);bowl.position.set(0,1.55,0);bowl.castShadow=true;bowl.receiveShadow=true;toilet.add(bowl);
-const hole=new THREE.Mesh(new THREE.CylinderGeometry(.66,.72,.12,64),dark);hole.scale.z=1.02;hole.position.set(0,1.72,0);toilet.add(hole);
-const waterMat=new THREE.MeshPhysicalMaterial({color:0xd9ff58,roughness:.12,metalness:.05,transparent:true,opacity:.86,clearcoat:1,clearcoatRoughness:.08});
-const water=new THREE.Mesh(new THREE.CircleGeometry(.57,64),waterMat);water.rotation.x=-Math.PI/2;water.scale.set(1,1.08,1);water.position.set(0,1.79,0);toilet.add(water);
-const rim=new THREE.Mesh(new THREE.TorusGeometry(.79,.105,20,80),porcelain);rim.rotation.x=Math.PI/2;rim.scale.set(1,1.12,1);rim.position.set(0,1.72,0);rim.castShadow=true;toilet.add(rim);
-const tank=new THREE.Mesh(new THREE.BoxGeometry(1.48,1.45,.48),porcelain);tank.position.set(0,2.6,-.9);tank.castShadow=true;tank.receiveShadow=true;toilet.add(tank);
-const tankTop=new THREE.Mesh(new THREE.BoxGeometry(1.56,.12,.55),porcelain);tankTop.position.set(0,3.38,-.9);toilet.add(tankTop);
-const button=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.035,32),chrome);button.position.set(0,3.47,-.9);toilet.add(button);
-const pipe=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.55,24),chrome);pipe.position.set(0,2.08,-.9);toilet.add(pipe);
-// Stylized, abstract golden stream: no person is shown.
-const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(.1,5.3,.05),new THREE.Vector3(.02,4.7,.02),new THREE.Vector3(-.12,3.8,0),new THREE.Vector3(.08,2.8,.02),new THREE.Vector3(0,1.91,0)]);
-const streamGeo=new THREE.TubeGeometry(curve,90,.105,16,false);const streamMat=new THREE.MeshPhysicalMaterial({color:0xe7ff45,emissive:0x526000,emissiveIntensity:.28,roughness:.12,metalness:.02,transparent:true,opacity:.88,clearcoat:1});const stream=new THREE.Mesh(streamGeo,streamMat);scene.add(stream);
-const streamGlow=new THREE.Mesh(new THREE.TubeGeometry(curve,90,.19,12,false),new THREE.MeshBasicMaterial({color:0xdfff42,transparent:true,opacity:.12,side:THREE.DoubleSide}));scene.add(streamGlow);
-const drops=new THREE.Group();scene.add(drops);const dropGeo=new THREE.SphereGeometry(1,12,10);const dropMat=new THREE.MeshStandardMaterial({color:0xe8ff4b,emissive:0x637000,emissiveIntensity:.35,roughness:.12});
-const dropData=[];for(let i=0;i<38;i++){const m=new THREE.Mesh(dropGeo,dropMat);const s=.035+Math.random()*.055;m.scale.set(s,s*(1.2+Math.random()),s);drops.add(m);dropData.push({mesh:m,phase:Math.random()*Math.PI*2,speed:.65+Math.random()*.65,r:.2+Math.random()*.55});}
-const rings=[];for(let i=0;i<4;i++){const m=new THREE.Mesh(new THREE.TorusGeometry(.25+i*.12,.018,8,64),new THREE.MeshBasicMaterial({color:0xe6ff55,transparent:true,opacity:.45-i*.07}));m.rotation.x=Math.PI/2;m.position.y=1.86+i*.005;toilet.add(m);rings.push(m);}
-const splashGroup=new THREE.Group();scene.add(splashGroup);const splashGeo=new THREE.SphereGeometry(1,12,10);const splashMat=new THREE.MeshStandardMaterial({color:0xeaff61,emissive:0x526000,emissiveIntensity:.4,roughness:.16});
-const splashes=[];for(let i=0;i<28;i++){const m=new THREE.Mesh(splashGeo,splashMat);const s=.035+Math.random()*.055;m.scale.set(s,s*1.8,s);splashGroup.add(m);splashes.push({mesh:m,a:Math.random()*Math.PI*2,r:.28+Math.random()*.8,h:.2+Math.random()*.9,phase:Math.random()*Math.PI*2});}
-const platform=new THREE.Mesh(new THREE.CylinderGeometry(2.15,2.15,.16,80),mat(0x202638,.4,.3));platform.position.y=-.12;platform.receiveShadow=true;platform.castShadow=true;scene.add(platform);
-const ringBase=new THREE.Mesh(new THREE.TorusGeometry(2.12,.025,10,100),new THREE.MeshBasicMaterial({color:0xe2ff55,transparent:true,opacity:.7}));ringBase.rotation.x=Math.PI/2;ringBase.position.y=-.025;scene.add(ringBase);
-const clock=new THREE.Clock();
-function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();
- toilet.rotation.y=Math.sin(t*.28)*.055;toilet.position.y=Math.sin(t*1.2)*.035;
- stream.scale.x=1+.07*Math.sin(t*5);streamGlow.scale.x=stream.scale.x;
- water.scale.set(1+.045*Math.sin(t*5),1+.055*Math.cos(t*4),1);
- rings.forEach((r,i)=>{const p=(t*.55+i*.25)%1;r.scale.setScalar(.65+p*1.7);r.material.opacity=(1-p)*.42;});
- dropData.forEach(d=>{const p=(t*d.speed+d.phase)%(Math.PI*2);d.mesh.position.set(Math.sin(p*1.3)*d.r*.45,2.05+(p/(Math.PI*2))*3.15,Math.cos(p)*d.r*.4);});
- splashes.forEach(s=>{const p=(t*.85+s.phase)%(Math.PI*2);s.mesh.position.set(Math.cos(s.a)*s.r,1.85+Math.abs(Math.sin(p))*s.h,Math.sin(s.a)*s.r);s.mesh.scale.y=.03+Math.abs(Math.sin(p))*.09;});
- camera.position.x=6+Math.sin(t*.18)*.25;camera.lookAt(0,1.85,0);renderer.render(scene,camera);}
-animate();
-addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+<div id="startOverlay"><div class="startbox"><div class="starticon">✧</div><h2>Awaken your magic.</h2><p>Allow camera access, hold your thumb and index finger together, then draw a symbol in the air. Release to cast.</p><button id="begin">ENABLE CAMERA & START</button><p style="font-size:10px">Your camera feed stays in this browser tab.</p></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script>
+const video=document.getElementById('camera'),draw=document.getElementById('draw'),fx=document.getElementById('fx'),ctx=draw.getContext('2d'),fctx=fx.getContext('2d');
+const statusEl=document.getElementById('status'),camlabel=document.getElementById('camlabel'),footerstatus=document.getElementById('footerstatus'),overlay=document.getElementById('startOverlay');
+let hands=null,camera=null,stream=null,drawing=false,path=[],lastPinch=false,particles=[],rings=[],lastPoint=null,activeSpell='fire',running=false;
+function resize(){draw.width=fx.width=innerWidth*devicePixelRatio;draw.height=fx.height=innerHeight*devicePixelRatio;draw.style.width=fx.style.width=innerWidth+'px';draw.style.height=fx.style.height=innerHeight+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);fctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+addEventListener('resize',resize);resize();
+function setStatus(s){statusEl.textContent=s}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function clearPath(){path=[];lastPoint=null;ctx.clearRect(0,0,innerWidth,innerHeight)}
+function pointFromLandmark(p){return{x:(1-p.x)*innerWidth,y:p.y*innerHeight}}
+function drawPath(){ctx.clearRect(0,0,innerWidth,innerHeight);if(path.length<2)return;ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.shadowBlur=20;ctx.shadowColor='#70f5db';ctx.strokeStyle='#a9ffed';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);for(let i=1;i<path.length;i++)ctx.lineTo(path[i].x,path[i].y);ctx.stroke();ctx.restore()}
+function classify(points){if(points.length<9)return'fire';let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;points.forEach(p=>{minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y)});let w=maxX-minX,h=maxY-minY,closure=dist(points[0],points[points.length-1]),ratio=closure/Math.max(1,Math.hypot(w,h));let turns=0,prev=0;for(let i=2;i<points.length;i++){let a=Math.atan2(points[i-1].y-points[i-2].y,points[i-1].x-points[i-2].x),b=Math.atan2(points[i].y-points[i-1].y,points[i].x-points[i-1].x);let d=Math.atan2(Math.sin(b-a),Math.cos(b-a));if(Math.abs(d)>.75)turns++}if(ratio<.23&&w>70&&h>70)return'shield';if(turns>5&&w>100&&h>100)return'portal';if(turns>=2||h>w*.75)return'lightning';return'fire'}
+function selectSpell(s){activeSpell=s;document.querySelectorAll('.spell').forEach(e=>e.classList.toggle('active',e.dataset.spell===s))}
+document.querySelectorAll('.spell').forEach(e=>e.addEventListener('click',()=>{selectSpell(e.dataset.spell);setStatus('Selected '+e.querySelector('strong').textContent)}));
+function cast(points,spell){const cx=points.reduce((a,p)=>a+p.x,0)/points.length,cy=points.reduce((a,p)=>a+p.y,0)/points.length;let color={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'}[spell];let count=spell==='portal'?130:85;for(let i=0;i<count;i++){let a=Math.random()*Math.PI*2,v=spell==='portal'?1+Math.random()*2:2+Math.random()*7;particles.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,size:2+Math.random()*5,color,drag:.97})}rings.push({x:cx,y:cy,r:10,life:1,color,kind:spell});let names={fire:'FIREBURST IGNITED',shield:'AEGIS SHIELD FORMED',lightning:'THUNDER RELEASED',portal:'VOID GATE OPENED'};setStatus(names[spell]);selectSpell(spell);clearPath()}
+function renderFX(){fctx.clearRect(0,0,innerWidth,innerHeight);particles=particles.filter(p=>p.life>0);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=p.drag;p.vy*=p.drag;p.vy+=p.color==='#ff985f'?.035:0;p.life-=.014;fctx.globalAlpha=Math.max(0,p.life);fctx.fillStyle=p.color;fctx.shadowBlur=16;fctx.shadowColor=p.color;fctx.beginPath();fctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);fctx.fill()});rings=rings.filter(r=>r.life>0);rings.forEach(r=>{r.r+=r.kind==='portal'?2.2:4;r.life-=.018;fctx.globalAlpha=r.life;fctx.strokeStyle=r.color;fctx.lineWidth=3;fctx.shadowBlur=20;fctx.shadowColor=r.color;fctx.beginPath();fctx.arc(r.x,r.y,r.r,0,Math.PI*2);fctx.stroke();if(r.kind==='portal'){fctx.beginPath();fctx.arc(r.x,r.y,r.r*.65,0,Math.PI*2);fctx.stroke()}});fctx.globalAlpha=1;requestAnimationFrame(renderFX)}renderFX();
+function onResults(results){if(!running)return;const lm=results.multiHandLandmarks&&results.multiHandLandmarks[0];if(!lm){if(drawing){drawing=false;if(path.length>8)cast(path,classify(path));else clearPath()}lastPinch=false;setStatus('Show your hand to the camera');return}const thumb=lm[4],index=lm[8],pinch=dist(thumb,index)<.065,p=pointFromLandmark(index);if(pinch){if(!drawing){drawing=true;path=[];setStatus('Tracing a glyph...')}if(!lastPoint||dist(p,lastPoint)>3){path.push(p);lastPoint=p}drawPath()}else if(drawing){drawing=false;if(path.length>8)cast(path,classify(path));else{clearPath();setStatus('Draw a bigger symbol')} }lastPinch=pinch}
+async function startCamera(){const btn=document.getElementById('begin');btn.disabled=true;btn.textContent='CONNECTING...';try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}},audio:false});video.srcObject=stream;await video.play();hands=new Hands({locateFile:(file)=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});hands.setOptions({maxNumHands:1,modelComplexity:1,minDetectionConfidence:.65,minTrackingConfidence:.6});hands.onResults(onResults);camera=new Camera(video,{onFrame:async()=>{if(hands)await hands.send({image:video})},width:1280,height:720});running=true;await camera.start();overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Pinch thumb + index to draw');document.getElementById('start').textContent='CAMERA ACTIVE';document.getElementById('start').disabled=true}catch(err){console.error(err);setStatus(err.name==='NotAllowedError'?'Camera permission denied':'Camera unavailable');btn.disabled=false;btn.textContent='TRY AGAIN';document.getElementById('start').textContent='CAMERA ERROR'}}
+document.getElementById('begin').addEventListener('click',startCamera);document.getElementById('start').addEventListener('click',startCamera);
 </script>
 </body></html>
