@@ -32,7 +32,22 @@ button{border:0;border-radius:10px;padding:12px 14px;background:var(--aqua);colo
 .startbox{width:min(420px,calc(100% - 36px));padding:30px;border:1px solid #343b50;background:#101522;border-radius:20px;text-align:center;box-shadow:0 30px 100px #0009}
 .starticon{font-size:38px;color:var(--aqua)}.startbox h2{font-size:27px;letter-spacing:-.05em;margin:12px 0 8px}.startbox p{font-size:13px;color:#aab1c4;line-height:1.6}.startbox button{padding:15px}
 @media(max-width:760px){.shell{padding:18px}main{align-items:flex-end;padding-bottom:20px}.intro{max-width:55%}h1{font-size:clamp(43px,12vw,70px)}.desc{font-size:12px}.instructions{display:none}.panel{width:42%;min-width:0;padding:11px}.spell{gap:7px;padding:7px}.glyph{width:29px;height:29px;font-size:16px}.spell strong{font-size:11px}.spell small{font-size:8px}.status{padding:9px}#status{font-size:11px}.pill{font-size:8px}.footer{font-size:8px}}
-@media(max-width:430px){main{gap:8px}.intro{max-width:51%}.panel{width:46%}.desc{max-width:190px}.sub{font-size:8px}}
+@media(max-width:760px){
+html,body{height:100%;min-height:100%;overflow:auto}
+.shell{position:absolute;min-height:100svh;height:auto;gap:22px;padding:16px}
+header{align-items:flex-start}.brand{gap:8px}.sigil{width:32px;height:32px}.brandname{font-size:12px}.sub{font-size:8px;letter-spacing:.1em}
+main{flex:1;min-height:calc(100svh - 150px);align-items:center;flex-direction:column;justify-content:center;gap:18px;padding:10px 0 18px}
+.intro{max-width:100%;width:100%;text-align:center}.eyebrow{font-size:9px}h1{font-size:clamp(46px,13vw,68px);margin:10px 0}.desc{font-size:12px;max-width:340px;margin:auto}
+.panel{width:100%;max-width:440px;min-width:0;padding:13px}.paneltop{margin-bottom:8px}.spell{display:inline-flex;width:calc(50% - 5px);vertical-align:top;margin:3px 1px;padding:8px}.glyph{width:30px;height:30px}.spell strong{font-size:11px}.spell small{font-size:7px;letter-spacing:0}
+.status{margin-top:8px;padding:9px}#status{font-size:11px}
+.footer{padding-bottom:env(safe-area-inset-bottom);font-size:8px}
+#startOverlay{padding:18px}.startbox{padding:22px 18px}
+#camera{object-fit:cover}
+}
+@media(max-width:380px){.spell{width:100%}.intro h1{font-size:46px}.pill{padding:7px 9px}}
+@media(orientation:landscape) and (max-height:500px){
+.shell{padding:10px 16px}main{flex-direction:row;min-height:0}.intro{width:48%;text-align:left}.panel{width:48%;max-width:380px}.instructions{display:none}h1{font-size:42px}.desc{margin:0}
+}
 </style>
 </head>
 <body>
@@ -51,8 +66,108 @@ button{border:0;border-radius:10px;padding:12px 14px;background:var(--aqua);colo
 </aside></main>
 <div class="footer"><div class="cameraState"><span>◉</span><span id="footerstatus">CAMERA NOT CONNECTED</span></div><div class="hint">NO WAND REQUIRED ✦</div></div>
 </div>
-<div id="startOverlay"><div class="startbox"><div class="starticon">✧</div><h2>Awaken your magic.</h2><p>Allow camera access, hold your thumb and index finger together, then draw a symbol in the air. Release to cast.</p><button id="begin">ENABLE CAMERA & START</button><p style="font-size:10px">Your camera feed stays in this browser tab.</p></div></div>
+<div id="startOverlay"><div class="startbox"><div class="starticon">✧</div><h2>Awaken your magic.</h2><p>Allow camera access, hold your thumb and index finger together, then draw a symbol in the air. Release to cast.</p><button id="begin">ENABLE CAMERA & START</button><button id="touchMode" type="button" style="background:#252d42;color:#e9edfa;margin-top:9px">USE TOUCH DRAWING INSTEAD</button><p style="font-size:10px">Camera runs locally in this tab. Touch drawing works without camera permission.</p></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script>
+(() => {
+'use strict';
+const video=document.getElementById('camera'), draw=document.getElementById('draw'), fx=document.getElementById('fx');
+const ctx=draw.getContext('2d'), fctx=fx.getContext('2d');
+const statusEl=document.getElementById('status'), camlabel=document.getElementById('camlabel'), footerstatus=document.getElementById('footerstatus'), overlay=document.getElementById('startOverlay');
+const begin=document.getElementById('begin'), startBtn=document.getElementById('start'), touchBtn=document.getElementById('touchMode');
+let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0;
+const colors={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'};
+function setStatus(s){statusEl.textContent=s}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+function resize(){
+ const dpr=Math.min(window.devicePixelRatio||1,2),w=window.innerWidth,h=window.innerHeight;
+ for(const c of [draw,fx]){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.width=w+'px';c.style.height=h+'px'}
+ ctx.setTransform(dpr,0,0,dpr,0,0);fctx.setTransform(dpr,0,0,dpr,0,0);
+}
+addEventListener('resize',resize);resize();
+function clearPath(){path=[];lastPoint=null;ctx.clearRect(0,0,innerWidth,innerHeight)}
+function drawPath(){
+ ctx.clearRect(0,0,innerWidth,innerHeight);if(path.length<2)return;
+ ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.shadowBlur=18;ctx.shadowColor='#70f5db';ctx.strokeStyle='#a9ffed';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);
+ for(let i=1;i<path.length;i++)ctx.lineTo(path[i].x,path[i].y);ctx.stroke();ctx.restore();
+}
+function classify(points){
+ if(points.length<8)return'fire';
+ let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+ points.forEach(p=>{minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y)});
+ const w=maxX-minX,h=maxY-minY,closure=dist(points[0],points[points.length-1]),ratio=closure/Math.max(1,Math.hypot(w,h));
+ let turns=0;
+ for(let i=2;i<points.length;i++){const a=Math.atan2(points[i-1].y-points[i-2].y,points[i-1].x-points[i-2].x),b=Math.atan2(points[i].y-points[i-1].y,points[i].x-points[i-1].x),d=Math.atan2(Math.sin(b-a),Math.cos(b-a));if(Math.abs(d)>.8)turns++}
+ if(ratio<.25&&w>55&&h>55)return'shield';
+ if(turns>5&&w>75&&h>75)return'portal';
+ if(turns>=2||h>w*.75)return'lightning';
+ return'fire';
+}
+function selectSpell(s){document.querySelectorAll('.spell').forEach(e=>e.classList.toggle('active',e.dataset.spell===s))}
+document.querySelectorAll('.spell').forEach(e=>e.addEventListener('click',()=>{const s=e.dataset.spell;selectSpell(s);setStatus('Selected '+e.querySelector('strong').textContent)}));
+function cast(points){
+ if(points.length<2)return;
+ const spell=classify(points),cx=points.reduce((a,p)=>a+p.x,0)/points.length,cy=points.reduce((a,p)=>a+p.y,0)/points.length,color=colors[spell],count=spell==='portal'?110:70;
+ for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,v=spell==='portal'?1+Math.random()*2:2+Math.random()*6;particles.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,size:2+Math.random()*4,color})}
+ rings.push({x:cx,y:cy,r:8,life:1,color,kind:spell});
+ const names={fire:'FIREBURST IGNITED',shield:'AEGIS SHIELD FORMED',lightning:'THUNDER RELEASED',portal:'VOID GATE OPENED'};
+ setStatus(names[spell]);selectSpell(spell);clearPath();
+}
+function renderFX(){
+ fctx.clearRect(0,0,innerWidth,innerHeight);
+ particles=particles.filter(p=>p.life>0);
+ for(const p of particles){p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;if(p.color===colors.fire)p.vy+=.035;p.life-=.018;fctx.globalAlpha=Math.max(0,p.life);fctx.fillStyle=p.color;fctx.shadowBlur=14;fctx.shadowColor=p.color;fctx.beginPath();fctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);fctx.fill()}
+ rings=rings.filter(r=>r.life>0);
+ for(const r of rings){r.r+=r.kind==='portal'?2:3.5;r.life-=.02;fctx.globalAlpha=r.life;fctx.strokeStyle=r.color;fctx.lineWidth=3;fctx.shadowBlur=18;fctx.shadowColor=r.color;fctx.beginPath();fctx.arc(r.x,r.y,r.r,0,Math.PI*2);fctx.stroke();if(r.kind==='portal'){fctx.beginPath();fctx.arc(r.x,r.y,r.r*.65,0,Math.PI*2);fctx.stroke()}}
+ fctx.globalAlpha=1;requestAnimationFrame(renderFX);
+}
+renderFX();
+function beginStroke(p){drawing=true;path=[p];lastPoint=p;setStatus('Tracing a glyph...');drawPath()}
+function addPoint(p){if(!lastPoint||dist(p,lastPoint)>2.5){path.push(p);lastPoint=p;drawPath()}}
+function endStroke(){if(!drawing)return;drawing=false;if(path.length>5)cast(path);else{clearPath();setStatus('Draw a bigger symbol')}}
+function onResults(results){
+ if(!running||manualMode)return;
+ const lm=results.multiHandLandmarks&&results.multiHandLandmarks[0];
+ if(!lm){if(drawing)endStroke();return}
+ const pinch=dist(lm[4],lm[8])<.075,p={x:(1-lm[8].x)*innerWidth,y:lm[8].y*innerHeight};
+ if(pinch){if(!drawing)beginStroke(p);else addPoint(p)}else if(drawing)endStroke();
+}
+function enableTouchMode(){
+ manualMode=true;running=false;
+ if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+ video.style.display='none';camlabel.textContent='TOUCH';footerstatus.textContent='TOUCH DRAWING ACTIVE';
+ overlay.style.display='none';startBtn.textContent='TOUCH MODE ACTIVE';startBtn.disabled=true;
+ setStatus('Touch and drag anywhere to draw a spell');
+ draw.style.pointerEvents='auto';
+}
+draw.addEventListener('pointerdown',e=>{if(!manualMode)return;if(e.pointerType==='mouse'&&e.button!==0)return;draw.setPointerCapture(e.pointerId);beginStroke({x:e.clientX,y:e.clientY})});
+draw.addEventListener('pointermove',e=>{if(manualMode&&drawing)addPoint({x:e.clientX,y:e.clientY})});
+draw.addEventListener('pointerup',()=>{if(manualMode)endStroke()});
+draw.addEventListener('pointercancel',()=>{if(manualMode)endStroke()});
+async function startCamera(){
+ begin.disabled=true;begin.textContent='CONNECTING CAMERA...';setStatus('Requesting camera permission...');
+ try{
+  if(!window.isSecureContext)throw new Error('Open this site using its HTTPS GitHub Pages address.');
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('This browser does not provide camera access.');
+  if(typeof window.Hands!=='function')throw new Error('Hand tracking could not load. Check your internet connection or use touch mode.');
+  stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'user'},width:{ideal:640},height:{ideal:480}}});
+  video.srcObject=stream;video.muted=true;video.playsInline=true;await video.play();
+  hands=new window.Hands({locateFile:file=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});
+  hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.55,minTrackingConfidence:.5});
+  hands.onResults(onResults);running=true;
+  const process=async()=>{if(!running||manualMode)return;if(video.readyState>=2&&!frameBusy){frameBusy=true;try{await hands.send({image:video})}catch(err){console.warn('Hand tracking frame failed',err)}finally{frameBusy=false}}raf=requestAnimationFrame(process)};
+  await new Promise(resolve=>{if(video.readyState>=2)resolve();else video.addEventListener('loadeddata',resolve,{once:true})});
+  process();overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Pinch thumb + index finger to draw');startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
+ }catch(err){
+  console.error(err);running=false;
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+  const message=err.name==='NotAllowedError'?'Camera permission denied. Try touch mode.':err.message||'Camera unavailable. Try touch mode.';
+  setStatus(message);begin.disabled=false;begin.textContent='TRY CAMERA AGAIN';startBtn.textContent='CAMERA UNAVAILABLE';
+ }
+}
+begin.addEventListener('click',startCamera);startBtn.addEventListener('click',startCamera);touchBtn.addEventListener('click',enableTouchMode);
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
 <script>
 const video=document.getElementById('camera'),draw=document.getElementById('draw'),fx=document.getElementById('fx'),ctx=draw.getContext('2d'),fctx=fx.getContext('2d');
