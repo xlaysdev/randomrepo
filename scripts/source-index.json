@@ -1,0 +1,104 @@
+[
+  {
+    "file": "scripts/source/DDLC_Scripts/ch0.txt",
+    "source_path": "DDLC_Scripts/ch0.txt",
+    "bytes": 26420,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch1.txt",
+    "source_path": "DDLC_Scripts/ch1.txt",
+    "bytes": 30574,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch10.txt",
+    "source_path": "DDLC_Scripts/ch10.txt",
+    "bytes": 1949,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch2.txt",
+    "source_path": "DDLC_Scripts/ch2.txt",
+    "bytes": 36927,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch20.txt",
+    "source_path": "DDLC_Scripts/ch20.txt",
+    "bytes": 21118,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch21.txt",
+    "source_path": "DDLC_Scripts/ch21.txt",
+    "bytes": 18079,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch22.txt",
+    "source_path": "DDLC_Scripts/ch22.txt",
+    "bytes": 26914,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch23.txt",
+    "source_path": "DDLC_Scripts/ch23.txt",
+    "bytes": 28607,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch3.txt",
+    "source_path": "DDLC_Scripts/ch3.txt",
+    "bytes": 47025,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch4.txt",
+    "source_path": "DDLC_Scripts/ch4.txt",
+    "bytes": 64065,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch40.txt",
+    "source_path": "DDLC_Scripts/ch40.txt",
+    "bytes": 21454,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/ch5.txt",
+    "source_path": "DDLC_Scripts/ch5.txt",
+    "bytes": 12648,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/natsuki.txt",
+    "source_path": "DDLC_Scripts/natsuki.txt",
+    "bytes": 26207,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/natsuki2.txt",
+    "source_path": "DDLC_Scripts/natsuki2.txt",
+    "bytes": 11800,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/sayori.txt",
+    "source_path": "DDLC_Scripts/sayori.txt",
+    "bytes": 23596,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/yuri.txt",
+    "source_path": "DDLC_Scripts/yuri.txt",
+    "bytes": 23938,
+    "extension": ".txt"
+  },
+  {
+    "file": "scripts/source/DDLC_Scripts/yuri2.txt",
+    "source_path": "DDLC_Scripts/yuri2.txt",
+    "bytes": 31780,
+    "extension": ".txt"
+  }
+]
