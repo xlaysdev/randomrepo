@@ -38,7 +38,7 @@ function init(){scene=new THREE.Scene();scene.background=new THREE.Color(0x87a9d
  renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=false;renderer.outputEncoding=THREE.sRGBEncoding;document.body.appendChild(renderer.domElement);
  const hemi=new THREE.HemisphereLight(0xd7e9ff,0x26341c,2.0);scene.add(hemi);const sun=new THREE.DirectionalLight(0xffe4b6,2);sun.position.set(-25,40,-60);scene.add(sun);
  const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500),m.grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.08;scene.add(ground);
- createCar();for(let i=0;i<8;i++)createRoad(i*48-80);for(let i=0;i<22;i++)createSideProps();for(let i=0;i<5;i++)spawnTraffic(true);
+ createCar();for(let i=0;i<8;i++)createRoad(i*48-336);for(let i=0;i<22;i++)createSideProps();for(let i=0;i<5;i++)spawnTraffic(true);
  window.addEventListener('resize',resize);requestAnimationFrame(loop);
 }
 function createCar(){carGroup=new THREE.Group();player=new THREE.Group();carGroup.add(player);scene.add(carGroup);
@@ -49,14 +49,14 @@ function createCar(){carGroup=new THREE.Group();player=new THREE.Group();carGrou
  player.position.set(0,0,0);carGroup.position.z=5;
 }
 function createRoad(z){const seg=new THREE.Group();seg.position.z=z;seg.add(box(roadWidth,.12,48,m.road,0,0,0));for(const x of [-roadWidth/2-.15,roadWidth/2+.15])seg.add(box(.25,.22,48,m.white,x,.06,0));
- for(let x=-3.6;x<=3.6;x+=3.6){if(x!==0)for(let z0=-22;z0<24;z0+=12)seg.add(box(.12,.03,5,m.line,x,.08,z0)}
+ for(let x=-3.6;x<=3.6;x+=3.6){if(x!==0)for(let z0=-22;z0<24;z0+=12)seg.add(box(.12,.03,5,m.line,x,.08,z0))}
  scene.add(seg);roadSegments.push(seg)}
 function createSideProps(){const side=Math.random()<.5?-1:1,z=-Math.random()*260-50;const x=side*(10+Math.random()*18);const group=new THREE.Group();group.position.set(x,0,z);
  if(Math.random()<.6){const trunk=box(.45,2,.45,mat(0x59412c),0,1,0);const crown=new THREE.Mesh(new THREE.ConeGeometry(2.3,4,7),mat(0x1d6848));crown.position.y=3.6;group.add(trunk,crown)}else{const h=5+Math.random()*18,w=4+Math.random()*7;group.add(box(w,h,w,m.building,0,h/2,0));group.add(box(w*.8,.2,w*.8,m.white,0,h*.65,0));}
  scene.add(group);props.push(group)}
 function createTrafficCar(color){const g=new THREE.Group(),body=box(1.75,.55,3.1,mat(color,.45,.15),0,.7,0),cab=box(1.35,.7,1.45,m.glass,0,1.18,-.2);g.add(body,cab);for(const x of [-.9,.9])for(const z of [-1,1]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,.22,10),m.wheel);w.rotation.z=Math.PI/2;w.position.set(x,.38,z);g.add(w)}return g}
 function spawnTraffic(initial=false){const lane=lanes[Math.floor(Math.random()*lanes.length)];const colors=[0xff4d66,0xffc94a,0x6aa7ff,0x9a82ff,0xe4eaf4,0x42d7aa];const car=createTrafficCar(colors[Math.floor(Math.random()*colors.length)]);car.position.set(lane,.0,initial?-120-Math.random()*200:-180-Math.random()*60);scene.add(car);traffic.push({mesh:car,lane,passed:false})}
-function reset(){traffic.forEach(t=>scene.remove(t.mesh));traffic=[];roadSegments.forEach((r,i)=>r.position.z=i*48-80);props.forEach(p=>{p.position.z=-Math.random()*260-40;p.position.x=(p.position.x<0?-1:1)*(10+Math.random()*18)});velocity=0;steer=0;playerX=0;distance=0;nitro=100;score=0;spawnClock=0;gameOver=false;running=true;overlay.style.display='none';keys.gas=false;keys.brake=false;keys.nitro=false;keys.drift=false}
+function reset(){traffic.forEach(t=>scene.remove(t.mesh));traffic=[];roadSegments.forEach((r,i)=>r.position.z=i*48-336);props.forEach(p=>{p.position.z=-Math.random()*260-40;p.position.x=(p.position.x<0?-1:1)*(10+Math.random()*18)});velocity=0;steer=0;playerX=0;distance=0;nitro=100;score=0;spawnClock=0;gameOver=false;running=true;overlay.style.display='none';keys.gas=false;keys.brake=false;keys.nitro=false;keys.drift=false}
 function crash(){gameOver=true;running=false;velocity=0;overlay.style.display='grid';document.querySelector('.logo').textContent='RUN ENDED';document.querySelector('.card h1').innerHTML='CRASH<br><em>OUT</em>';document.querySelector('.card p').textContent='Distance: '+Math.floor(distance)+' m. Hit START to jump back into the road.';startBtn.textContent='RESTART';toast.style.opacity=1;setTimeout(()=>toast.style.opacity=0,850);if(distance>best){best=distance;bestEl.textContent=Math.floor(best)+' m';try{localStorage.setItem('neondrive-best',String(Math.floor(best)))}catch(e){}}}
 function update(dt){if(!running)return;dt=Math.min(dt,.04);
  const acceleration=keys.gas?26:0,braking=keys.brake?42:0,boost=keys.nitro&&nitro>0&&keys.gas;
