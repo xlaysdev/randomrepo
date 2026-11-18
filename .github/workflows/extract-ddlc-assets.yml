@@ -5,6 +5,7 @@ on:
     paths:
       - "PC _ Computer - Doki Doki Literature Club - Characters - *.zip"
       - ".asset-extraction-trigger"
+      - "DDLC_Scripts.zip"
   workflow_dispatch:
 
 permissions:
@@ -97,6 +98,50 @@ jobs:
           (root / "assets" / "sprite-index.json").write_text(
               json.dumps(index, indent=2), encoding="utf-8")
           print(f"Extracted {len(index)} PNG files from {len(packs)} ZIP packs.")
+          PY
+
+      - name: Extract original dialogue script files
+        run: |
+          python - <<'PY'
+          import json, re, zipfile
+          from pathlib import Path, PurePosixPath
+
+          archive = Path("DDLC_Scripts.zip")
+          if not archive.exists():
+              print("DDLC_Scripts.zip not present; skipping dialogue extraction.")
+              raise SystemExit(0)
+
+          root = Path("scripts/source")
+          root.mkdir(parents=True, exist_ok=True)
+          manifest = []
+          allowed = {".rpy", ".txt", ".json", ".csv", ".yaml", ".yml", ".xml"}
+          with zipfile.ZipFile(archive) as zf:
+              for item in zf.infolist():
+                  if item.is_dir():
+                      continue
+                  source = PurePosixPath(item.filename)
+                  if source.suffix.lower() not in allowed:
+                      continue
+                  parts = [re.sub(r"[^A-Za-z0-9._ -]+", "_", p)
+                           for p in source.parts if p not in ("", ".", "..")]
+                  if not parts:
+                      continue
+                  destination = root.joinpath(*parts)
+                  destination.parent.mkdir(parents=True, exist_ok=True)
+                  data = zf.read(item)
+                  destination.write_bytes(data)
+                  manifest.append({
+                      "file": destination.as_posix(),
+                      "source_path": item.filename,
+                      "bytes": len(data),
+                      "extension": destination.suffix.lower()
+                  })
+
+          (Path("scripts") / "source-index.json").write_text(
+              json.dumps(manifest, indent=2), encoding="utf-8")
+          print(f"Extracted {len(manifest)} dialogue/source files.")
+          for entry in manifest:
+              print(entry["file"])
           PY
 
       - name: Commit extracted sprites
