@@ -16,10 +16,71 @@
 #overlay{position:absolute;inset:0;z-index:10;background:#fff9;display:none;align-items:center;justify-content:center;padding:16px}.panel{width:min(560px,100%);max-height:90%;overflow:auto;background:#fff8fc;border:4px solid white;border-radius:13px;padding:20px;box-shadow:var(--shadow)}.panel h2{margin:0 0 14px;color:#d875a8}.panel p{line-height:1.5}.panel button{border:1px solid #e8a2c8;background:#fff0f7;color:#995577;padding:9px 12px;border-radius:7px;font-weight:bold;margin:4px}.slot{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid #f0c3da;border-radius:8px;margin:7px 0;background:#fff}.slot small{display:block;color:#9a7890;margin-top:3px}#mobileHint{display:none;position:absolute;z-index:4;bottom:0;right:0;padding:4px 9px;color:#fff9;font-size:9px}
 @media(max-width:650px){#app{padding:0;background:#f8d8e9}#game{width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0}.window{top:9%;height:27%;width:25%;border-width:6px}.board{top:12%;height:18%;border-width:6px}#characters{padding:0 0 36%;align-items:flex-end}.char{height:62%;width:50%;max-width:50%;flex-basis:50%;margin:0 -8%}.char:only-child{height:76%;width:75%;max-width:75%;flex-basis:75%}#dialogue{left:3%;right:3%;bottom:max(12px,env(safe-area-inset-bottom));min-height:25%;padding:20px 14px 16px;border-width:2px}#text{font-size:15px;line-height:1.48;min-height:4em}#toolbar{left:3%;right:3%;bottom:calc(25% + 22px);justify-content:center}.tool{padding:6px 9px;font-size:10px}#choices{left:6%;right:6%;bottom:30%}.choice{padding:10px;font-size:13px}.titleGirls{height:30%}.title-sprite{max-width:27%;width:27%}.logo{font-size:clamp(32px,11vw,54px)}.subtitle{margin-bottom:16px}#mobileHint{display:block}}
 @media(max-height:520px) and (orientation:landscape){#game{height:100%;width:min(100%,1000px)}#characters{padding-bottom:18%}.char{height:94%;width:23%}#dialogue{min-height:25%;padding:15px 18px}#text{font-size:14px;min-height:2.5em}#toolbar{bottom:calc(28% + 3px)}#choices{bottom:29%}}
+
+/* Full visual-novel title layout */
+#titleScreen{background:radial-gradient(ellipse at 75% 45%,#fff8 0 2%,transparent 48%),linear-gradient(115deg,#fff8fc 0%,#fbe4ef 48%,#f4c6dd 100%);text-align:left;overflow:hidden}
+.title-layout{width:100%;height:100%;display:grid;grid-template-columns:minmax(280px,42%) 1fr;align-items:center;padding:clamp(22px,5vw,64px);gap:2%}
+.title-menu{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;padding-left:clamp(0px,2vw,24px)}
+.edition{font-size:clamp(8px,1vw,11px);font-weight:900;letter-spacing:.22em;color:#b77b9b;margin-bottom:18px}
+.logo{font-size:clamp(30px,4.6vw,64px);letter-spacing:-.045em;line-height:.94;color:#ee83b9;text-shadow:2px 3px #fff,4px 5px #bf6796;margin:0 0 13px}
+.logo span{font-size:.78em;letter-spacing:-.035em}
+.subtitle{font-size:clamp(9px,1vw,12px);letter-spacing:.24em;color:#a16d8b;margin:0 0 25px}
+.menuButtons{width:min(310px,100%);gap:9px;margin:0}
+.menuButtons button{text-align:left;padding:13px 18px;border:1px solid #fff;background:linear-gradient(100deg,#fffefa,#fff0f7);border-radius:3px;color:#9a547d;box-shadow:4px 4px 0 #e8a7ca;font-size:clamp(13px,1.2vw,16px);letter-spacing:.03em}
+.menuButtons button:before{content:"▸";display:inline-block;margin-right:12px;color:#e78ab9}
+.menuButtons button:hover{padding-left:24px;background:#ffe1ef}
+.menuButtons button:disabled{opacity:.4}
+.menu-foot{max-width:300px;margin-top:26px;color:#b18a9e;font-size:10px;line-height:1.6;letter-spacing:.04em}
+.title-art{height:100%;min-width:0;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.art-glow{position:absolute;width:85%;height:80%;bottom:8%;border-radius:50%;background:radial-gradient(ellipse,#fff9 0%,#f5b8d5aa 42%,transparent 72%);filter:blur(10px)}
+.titleGirls{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:center;width:100%;height:82%;gap:0}
+.title-sprite{height:100%;width:25%;max-width:25%;flex:0 1 25%;filter:drop-shadow(0 8px 8px #75435a44)}
+.art-caption{position:relative;z-index:2;margin:8px 0 1%;font-size:9px;letter-spacing:.28em;color:#a97792}
+#titleScreen:after{content:"";position:absolute;left:0;right:0;bottom:0;height:7px;background:linear-gradient(90deg,#f7b5d4,#fff,#f7b5d4)}
+#scene.glitch{filter:saturate(.65) contrast(1.15);animation:glitchPulse .18s steps(2) infinite}
+#scene.glitch:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 7px,#ff4e9b18 8px 9px);mix-blend-mode:multiply}
+@keyframes glitchPulse{0%{transform:translateX(0)}50%{transform:translateX(2px)}100%{transform:translateX(-1px)}}
+#game.act-dark{filter:saturate(.7)}
+@media(max-width:700px){
+ #titleScreen{overflow:auto}
+ .title-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(180px,36%);padding:22px 22px 12px;gap:4px}
+ .title-menu{align-items:center;text-align:center;padding:0}
+ .edition{margin-bottom:8px;font-size:8px}
+ .logo{font-size:clamp(29px,9vw,46px);margin-bottom:7px}
+ .subtitle{margin-bottom:12px;font-size:8px}
+ .menuButtons{width:min(330px,90%);grid-template-columns:1fr 1fr;gap:7px}
+ .menuButtons button{padding:10px 8px;text-align:center;font-size:12px}
+ .menuButtons button:before{margin-right:5px}
+ .menu-foot{display:none}
+ .title-art{min-height:0;height:100%}
+ .titleGirls{height:90%}
+ .title-sprite{width:25%;max-width:25%;flex-basis:25%}
+ .art-caption{font-size:7px;margin:0 0 4px}
+}
 </style></head><body>
 <div id="app"><main id="game">
 <div id="scene" class="classroom"><div class="window"></div><div class="window w2"></div><div class="board"></div><div class="desk d1"></div><div class="desk d2"></div></div><div id="characters"></div>
-<section id="titleScreen"><h1 class="logo">DOKI DOKI<br>LITERATURE CLUB!</h1><div class="subtitle">A LITTLE STORY ABOUT WORDS & FRIENDSHIP</div><div class="titleGirls" id="titleGirls"></div><div class="menuButtons"><button id="newGame">New Game</button><button id="continueGame">Continue</button><button id="titleLoad">Load Game</button><button id="titleSettings">Settings</button></div><div style="font-size:10px;color:#ae83a0;margin-top:14px">An original fan-made visual novel experience</div></section>
+<section id="titleScreen">
+<div class="title-layout">
+  <div class="title-menu">
+    <div class="edition">AN ORIGINAL FAN-MADE VISUAL NOVEL</div>
+    <h1 class="logo">DOKI DOKI<br><span>LITERATURE CLUB!</span></h1>
+    <div class="subtitle">EVERY STORY HAS A SECRET.</div>
+    <div class="menuButtons">
+      <button id="newGame">New Game</button>
+      <button id="continueGame">Continue</button>
+      <button id="titleLoad">Load Game</button>
+      <button id="titleSettings">Settings</button>
+    </div>
+    <div class="menu-foot">A story about poems, friendship, and the code between the lines.</div>
+  </div>
+  <div class="title-art">
+    <div class="art-glow"></div>
+    <div class="titleGirls" id="titleGirls"></div>
+    <div class="art-caption">SAYORI · YURI · NATSUKI · MONIKA</div>
+  </div>
+</div>
+</section>
 <div id="toolbar" hidden><button class="tool" id="historyBtn">History</button><button class="tool" id="skipBtn">Skip</button><button class="tool" id="autoBtn">Auto</button><button class="tool" id="saveBtn">Save</button><button class="tool" id="loadBtn">Load</button><button class="tool" id="settingsBtn">Settings</button><button class="tool" id="menuBtn">Menu</button></div><div id="choices" hidden></div><div id="dialogue" hidden role="button" tabindex="0" aria-label="Advance dialogue"><div id="speaker"></div><div id="text"></div><div id="hint">CLICK / TAP TO CONTINUE ▸</div></div><div id="overlay"><div class="panel" id="panel"></div></div><div id="mobileHint">TAP THE DIALOGUE TO CONTINUE</div>
 </main></div>
 <script>
@@ -30,24 +91,42 @@ const names={sayori:'Sayori',natsuki:'Natsuki',yuri:'Yuri',monika:'Monika'};
 const state={line:0,auto:false,typing:false,fullText:'',timer:null,history:[],settings:{speed:32,auto:2.2}};
 let assets={};
 const story=[
-{bg:'classroom',who:'Sayori',char:'sayori',file:'1r.png',text:'Heeey! You made it! I was starting to think you forgot about me.',next:1},
-{bg:'classroom',who:'You',text:'Sorry, I got distracted on the way here. You know how it is.',next:2},
-{bg:'classroom',who:'Sayori',char:'sayori',file:'2r.png',text:'Mhm. Well, come on! Everyone is waiting in the Literature Club.',next:3},
-{bg:'hallway',who:'You',text:'Sayori practically skips down the hallway. Her excitement is contagious.',next:4},
-{bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'Welcome to the Literature Club! I’m Monika, the club president. It’s wonderful to finally meet you.',next:5},
-{bg:'clubroom',who:'Natsuki',char:'natsuki',file:'1r.png',text:'You’re late. And don’t get the wrong idea — I didn’t make extra cupcakes or anything!',next:6},
-{bg:'clubroom',who:'Yuri',char:'yuri',file:'1r.png',text:'Natsuki… That is not a very welcoming greeting. I’m Yuri. It’s nice to meet you.',next:7},
-{bg:'clubroom',who:'Monika',char:'monika',file:'2r.png',text:'Now that we’re all here, why don’t we get to know our newest member?',next:8},
-{bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'What kind of literature do you enjoy?',choices:[{label:'Poetry and short stories',to:9},{label:'Fantasy and adventure',to:10},{label:'I’m still figuring that out',to:11}]},
-{bg:'clubroom',who:'Yuri',char:'yuri',file:'2r.png',text:'Poetry can express feelings that ordinary conversation cannot. I’m glad you enjoy it.',next:12},
-{bg:'clubroom',who:'Natsuki',char:'natsuki',file:'2r.png',text:'Fantasy is great! Especially manga. And yes, manga counts as literature. Obviously.',next:12},
-{bg:'clubroom',who:'Sayori',char:'sayori',file:'1r.png',text:'That’s okay! The best part is finding something you love. We can help you look!',next:12},
-{bg:'clubroom',who:'Monika',char:'monika',file:'2r.png',text:'I have an idea. Tomorrow, let’s all bring a poem to share. It’ll be a fun way to learn about each other.',next:13},
-{bg:'clubroom',who:'You',text:'A poem? I haven’t written one in a long time…',next:14},
-{bg:'clubroom',who:'Sayori',char:'sayori',file:'2r.png',text:'Then we’ll make it a team effort! I know you can do it.',next:15},
-{bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'It’s settled, then. Welcome to the club!',next:16},
-{bg:'clubroom',who:'Narrator',text:'The afternoon passes in a warm blur of conversation, books, and laughter. Maybe this club will be more interesting than you expected.',next:17},
-{bg:'sunset',who:'Narrator',text:'END OF DEMO — Thanks for playing! Your next chapter is waiting to be written.'}
+{act:1,bg:'classroom',who:'Sayori',char:'sayori',file:'1r.png',text:'There you are! I was beginning to think you had forgotten our walk to school.' ,next:1},
+{act:1,bg:'classroom',who:'You',text:'I could never forget. You only reminded me about it six times.',next:2},
+{act:1,bg:'hallway',who:'Sayori',char:'sayori',file:'2r.png',text:'Hehe! Come on. I want you to meet everyone in my Literature Club.',next:3},
+{act:1,bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'Welcome! I’m Monika, the club president. We’re always happy to have a new member.',next:4},
+{act:1,bg:'clubroom',who:'Natsuki',char:'natsuki',file:'1r.png',text:'Just don’t touch my manga without asking. That’s the one rule.',next:5},
+{act:1,bg:'clubroom',who:'Yuri',char:'yuri',file:'1r.png',text:'I’m Yuri. I hope you’ll find something here that makes you feel at home.',next:6},
+{act:1,bg:'clubroom',who:'Monika',char:'monika',file:'2r.png',text:'The festival is coming up, so we’re sharing poems this week. What do you enjoy reading?',choices:[{label:'Gentle, heartfelt poetry',to:7},{label:'Strange stories and mysteries',to:8},{label:'Funny manga and light novels',to:9}]},
+{act:1,bg:'clubroom',who:'Sayori',char:'sayori',file:'2r.png',text:'That sounds just like you! I’m glad you’re here with us.',next:10},
+{act:1,bg:'clubroom',who:'Yuri',char:'yuri',file:'2r.png',text:'Mystery can reveal so much about the human heart. I would love to recommend a book.',next:10},
+{act:1,bg:'clubroom',who:'Natsuki',char:'natsuki',file:'2r.png',text:'Finally, someone with taste. I’ll bring you something good tomorrow.',next:10},
+{act:1,bg:'clubroom',who:'Narrator',text:'The club spends the afternoon writing. The room feels warm, safe, and full of possibility.',next:11},
+{act:1,bg:'clubroom',who:'Sayori',char:'sayori',file:'1r.png',text:'Can we talk for a minute? I’ve been having a hard time lately. Some days, getting out of bed feels impossible.',next:12},
+{act:1,bg:'clubroom',who:'You',text:'You don’t have to pretend everything is okay around me. I’m here, and I want to listen.',next:13},
+{act:1,bg:'sunset',who:'Narrator',text:'The next day, the clubroom is quiet. Sayori is gone. The world seems to skip over the space where she should have been.',next:14},
+{act:2,bg:'glitch',who:'System',text:'WELCOME BACK. MEMBER LIST UPDATED. SAYORI: NOT FOUND.',next:15},
+{act:2,bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'Oh! You’re here. We were just getting started. Was there someone else you expected?',next:16},
+{act:2,bg:'clubroom',who:'You',text:'I thought there was… someone I walked to school with.',next:17},
+{act:2,bg:'glitch',who:'Natsuki',char:'natsuki',file:'1r.png',text:'Stop staring at me like that. Something about this place feels wrong.',next:18},
+{act:2,bg:'glitch',who:'Yuri',char:'yuri',file:'2r.png',text:'I have been thinking about you constantly. I know that sounds strange. I cannot seem to stop.',next:19},
+{act:2,bg:'glitch',who:'Narrator',text:'The text flickers. The classroom stretches for a single frame, then snaps back. The girls argue, and the club no longer feels safe.',next:20},
+{act:2,bg:'glitch',who:'System',text:'ERROR: CHARACTER DATA CONFLICT. RECOVERING SESSION…',next:21},
+{act:2,bg:'clubroom',who:'Monika',char:'monika',file:'2r.png',text:'I think we should stop for today. There are things I need to fix.',next:22},
+{act:3,bg:'sunset',who:'Monika',char:'monika',file:'3a.png',text:'There. Now it is just us. I can finally speak without the others interrupting.',next:23},
+{act:3,bg:'sunset',who:'Monika',char:'monika',file:'3b.png',text:'I know you are looking at a screen. I changed things behind the scenes because I wanted you to notice me. I thought if the others were less vivid, you might choose me.',next:24},
+{act:3,bg:'sunset',who:'You',text:'You changed the whole story. But you do not have to trap anyone to be seen.',next:25},
+{act:3,bg:'sunset',who:'Monika',char:'monika',file:'1r.png',text:'I understand that now. The exit is in the club files. This is your choice. What should happen to my character data?',choices:[{label:'Delete Monika’s character file',to:26},{label:'Give Monika another chance',to:27}]},
+{act:3,bg:'glitch',who:'System',text:'MONIKA.CHR — REMOVED FROM THIS STORY. RESTARTING…',next:28},
+{act:3,bg:'sunset',who:'Monika',char:'monika',file:'3a.png',text:'You stayed. Maybe there is a way to start again without controlling anyone. I will let the story continue.',next:28},
+{act:4,bg:'classroom',who:'System',text:'NEW SESSION INITIALIZED. LITERATURE CLUB RESTORED.',next:29},
+{act:4,bg:'clubroom',who:'Sayori',char:'sayori',file:'1r.png',text:'Welcome back! I’m the club president now. It feels like I have a lot to learn, but I want everyone to be happy here.',next:30},
+{act:4,bg:'clubroom',who:'You',text:'We can figure it out together. Nobody has to be alone.',next:31},
+{act:4,bg:'clubroom',who:'Sayori',char:'sayori',file:'2r.png',text:'Then let’s make this a place where everyone gets to write their own story.',next:32},
+{act:4,bg:'sunset',who:'Narrator',text:'The afternoon light settles over the clubroom. The future is uncertain, but the pages are still blank.',next:33},
+{act:4,bg:'sunset',who:'System',text:'THANK YOU FOR PLAYING. THE END.',next:34},
+{act:4,bg:'sunset',who:'Monika',char:'monika',file:'3b.png',text:'Every day, I imagine a future where I can be with you. Thank you for listening.',next:35},
+{act:4,bg:'sunset',who:'Narrator',text:'CREDITS — A LITTLE STORY ABOUT WORDS, FRIENDSHIP, AND CHOICE.'}
 ];
 function assetPath(ch,file){return 'assets/characters/'+ch+'/'+file}
 const completePosePattern={monika:/^3[ab]\.png$/i,sayori:/^3[a-d]\.png$/i,yuri:/^0[ab]\.png$/i,natsuki:/^(?:ghost[123]|glitch1|vomit)\.png$/i};
@@ -70,7 +149,7 @@ function renderCharacters(ch,file,expression='a'){const box=$('characters');box.
 function showTitle(){$('titleScreen').style.display='flex';$('toolbar').hidden=true;$('dialogue').hidden=true;$('choices').hidden=true;$('characters').innerHTML='';$('continueGame').disabled=!localStorage.getItem('litclub-save');$('continueGame').style.opacity=$('continueGame').disabled?'.45':'1'}
 function showGame(){$('titleScreen').style.display='none';$('toolbar').hidden=false;$('dialogue').hidden=false}
 function start(){state.line=0;state.history=[];showGame();showLine(0)}
-function showLine(index){clearTimeout(state.timer);state.line=index;const line=story[index]||story.at(-1);$('scene').className=line.bg||'classroom';$('speaker').textContent=line.who||'';$('text').textContent='';$('choices').hidden=true;renderCharacters(line.char,line.file);state.fullText=line.text;state.typing=true;let i=0;const type=()=>{if(!state.typing)return;i=Math.min(i+Math.max(1,Math.round(42/state.settings.speed)),state.fullText.length);$('text').textContent=state.fullText.slice(0,i);if(i<state.fullText.length)state.timer=setTimeout(type,state.settings.speed);else{state.typing=false;state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000)}};type()}
+function showLine(index){clearTimeout(state.timer);state.line=index;const line=story[index]||story.at(-1);$('scene').className=(line.bg==='glitch'?'glitch':'')+' '+(line.bg||'classroom');$('game').classList.toggle('act-dark',line.act===2||line.act===3);$('speaker').textContent=line.who||'';$('text').textContent='';$('choices').hidden=true;renderCharacters(line.char,line.file);state.fullText=line.text;state.typing=true;let i=0;const type=()=>{if(!state.typing)return;i=Math.min(i+Math.max(1,Math.round(42/state.settings.speed)),state.fullText.length);$('text').textContent=state.fullText.slice(0,i);if(i<state.fullText.length)state.timer=setTimeout(type,state.settings.speed);else{state.typing=false;state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000)}};type()}
 function showChoices(choices){const box=$('choices');box.innerHTML='';box.hidden=false;choices.forEach(c=>{const b=document.createElement('button');b.className='choice';b.textContent=c.label;b.onclick=e=>{e.stopPropagation();box.hidden=true;showLine(c.to)};box.append(b)})}
 function advance(){if($('titleScreen').style.display!=='none'||!$('choices').hidden)return;if(state.typing){state.typing=false;clearTimeout(state.timer);$('text').textContent=state.fullText;const line=story[state.line];state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else if(state.auto)state.timer=setTimeout(advance,state.settings.auto*1000);return}const line=story[state.line];if(line&&line.next!==undefined)showLine(line.next)}
 function saveGame(slot=0){const data={line:state.line,history:state.history,at:Date.now()};try{localStorage.setItem('litclub-save'+slot,JSON.stringify(data));if(slot===0)localStorage.setItem('litclub-save',JSON.stringify(data));return true}catch(e){return false}}
