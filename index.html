@@ -141,10 +141,10 @@ async function loadFullDialogue(){
    const res=await fetch(file.file);
    if(!res.ok)throw Error('Could not load '+file.file);
    const raw=await res.text();
-   for(const rawLine of raw.split(/\\r?\\n/)){
+   for(const rawLine of raw.split(/\r?\n/)){
     const line=rawLine.trim();
     if(!line||line.startsWith('#'))continue;
-    const m=line.match(/^(?:(s|m|n|y|mc)(?:\\s+([0-9][a-z])?)?\\s+)?("(?:[^"\\\\]|\\\\.)*")\\s*$/i);
+    const m=line.match(/^(?:(s|m|n|y|mc)(?:\s+([0-9][a-z])?)?\s+)?("(?:[^"\\]|\\.)*")\s*$/i);
     if(!m)continue;
     let value;
     try{value=JSON.parse(m[3])}catch(e){continue}
