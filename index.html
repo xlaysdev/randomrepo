@@ -50,7 +50,7 @@ const story=[
 {bg:'sunset',who:'Narrator',text:'END OF DEMO — Thanks for playing! Your next chapter is waiting to be written.'}
 ];
 function assetPath(ch,file){return 'assets/characters/'+ch+'/'+file}
-const completePosePattern={monika:/^3[ab]\.png$/i,natsuki:/^3[a-d]\.png$/i,sayori:/^3[a-d]\.png$/i,yuri:/^(?:0[ab]|3a)\.png$/i};
+const completePosePattern={monika:/^3[ab]\.png$/i,natsuki:/^3b\.png$/i,sayori:/^3[a-d]\.png$/i,yuri:/^(?:0[ab]|3b)\.png$/i};
 function isCompletePose(ch,file){return !!file&&!!completePosePattern[ch]&&completePosePattern[ch].test(file)}
 function chooseFile(ch,requested){const files=assets[ch]||[];if(isCompletePose(ch,requested)&&files.includes(requested))return requested;return files.find(file=>isCompletePose(ch,file))||null}
 function buildTitleGirls(){const box=$('titleGirls');box.innerHTML='';['sayori','yuri','natsuki','monika'].forEach(ch=>{const file=chooseFile(ch);if(!file)return;const im=document.createElement('img');im.alt=names[ch];im.src=assetPath(ch,file);im.onerror=()=>im.remove();box.append(im)})}
