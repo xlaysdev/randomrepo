@@ -55,7 +55,7 @@ function key(k,on){if(k in keys)keys[k]=on}
 addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();let k=e.key.toLowerCase();if(k==='a'||k==='arrowleft')key('left',true);if(k==='d'||k==='arrowright')key('right',true);if(k==='w'||k==='arrowup')key('gas',true);if(k==='s'||k==='arrowdown')key('brake',true);if(k==='shift')key('nitro',true);if(k===' ')key('drift',true);if(k==='v')setCar(choice+1);if(k==='c')setCar(choice-1)});
 addEventListener('keyup',e=>{let k=e.key.toLowerCase();if(k==='a'||k==='arrowleft')key('left',false);if(k==='d'||k==='arrowright')key('right',false);if(k==='w'||k==='arrowup')key('gas',false);if(k==='s'||k==='arrowdown')key('brake',false);if(k==='shift')key('nitro',false);if(k===' ')key('drift',false)});
 document.querySelectorAll('.control').forEach(el=>{let k=el.dataset.key;el.addEventListener('pointerdown',e=>{e.preventDefault();el.setPointerCapture(e.pointerId);key(k,true)});let release=e=>{e.preventDefault();key(k,false)};el.addEventListener('pointerup',release);el.addEventListener('pointercancel',release)});
-$('nextCar').onclick=()=>setCar(choice+1;$('prevCar').onclick=()=>setCar(choice-1);
+$('nextCar').onclick=()=>setCar(choice+1);$('prevCar').onclick=()=>setCar(choice-1);
 start.onclick=()=>{document.querySelector('.logo').textContent='NEON DRIVE // FREE ROAM';document.querySelector('.card h1').innerHTML='OPEN<br><em>WORLD</em>';document.querySelector('.card p').textContent='Explore city streets, roads, parks, and countryside. Pick a ride and roam.';start.textContent='ENTER WORLD';reset()};init();
 })();
 </script>
