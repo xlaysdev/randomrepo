@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install image library
+        run: python -m pip install --quiet pillow
+
       - name: Extract PNG sprites and build an index
         run: |
           python - <<'PY'
@@ -95,9 +98,6 @@ jobs:
               json.dumps(index, indent=2), encoding="utf-8")
           print(f"Extracted {len(index)} PNG files from {len(packs)} ZIP packs.")
           PY
-
-      - name: Install image library
-        run: python -m pip install --quiet pillow
 
       - name: Commit extracted sprites
         run: |
