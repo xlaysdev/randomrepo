@@ -47,7 +47,7 @@ const story=[
 {bg:'clubroom',who:'Sayori',char:'sayori',file:'2r.png',text:'Then we’ll make it a team effort! I know you can do it.',next:15},
 {bg:'clubroom',who:'Monika',char:'monika',file:'1r.png',text:'It’s settled, then. Welcome to the club!',next:16},
 {bg:'clubroom',who:'Narrator',text:'The afternoon passes in a warm blur of conversation, books, and laughter. Maybe this club will be more interesting than you expected.',next:17},
-{bg:'sunset',who:'Narrator',text:'END OF DEMO — Thanks for playing! Your next chapter is waiting to be written.',next:17}
+{bg:'sunset',who:'Narrator',text:'END OF DEMO — Thanks for playing! Your next chapter is waiting to be written.'}
 ];
 function assetPath(ch,file){return 'assets/characters/'+ch+'/'+file}
 function chooseFile(ch,requested){const files=assets[ch]||[];if(requested&&files.includes(requested))return requested;const preferred=['1r.png','1l.png','1.png','2r.png','2l.png','2.png','a.png'];return preferred.find(x=>files.includes(x))||files.find(x=>!/(sheet|eyes|glitch|preview)/i.test(x))||'1r.png'}
@@ -75,7 +75,7 @@ function toast(msg){const h=$('hint');h.textContent=msg.toUpperCase();setTimeout
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 $('newGame').onclick=start;$('continueGame').onclick=()=>{if(!loadGame())start()};$('titleLoad').onclick=()=>openPanel('load');$('titleSettings').onclick=()=>openPanel('settings');$('dialogue').onclick=advance;$('dialogue').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();advance()}};
 $('historyBtn').onclick=()=>openPanel('history');$('saveBtn').onclick=()=>openPanel('save');$('loadBtn').onclick=()=>openPanel('load');$('settingsBtn').onclick=()=>openPanel('settings');$('menuBtn').onclick=()=>openPanel('menu');
-$('skipBtn').onclick=()=>{if(state.typing){state.typing=false;clearTimeout(state.timer);$('text').textContent=state.fullText}advance()};
+$('skipBtn').onclick=()=>{if(state.typing){state.typing=false;clearTimeout(state.timer);$('text').textContent=state.fullText;const line=story[state.line];state.history.push({who:line.who,text:line.text});if(line.choices)showChoices(line.choices);else advance()}else advance()};
 $('autoBtn').onclick=()=>{state.auto=!state.auto;$('autoBtn').textContent=state.auto?'Auto: ON':'Auto';if(state.auto&&!state.typing&&$('choices').hidden)state.timer=setTimeout(advance,state.settings.auto*1000)};
 $('overlay').onclick=e=>{if(e.target===$('overlay'))closePanel()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('overlay').style.display==='flex')closePanel();else if($('titleScreen').style.display==='none')openPanel('menu')}if((e.key==='Enter'||e.key===' ')&&$('overlay').style.display!=='flex'&&$('titleScreen').style.display==='none'&&document.activeElement!==$('dialogue')){e.preventDefault();advance()}if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)$('game').requestFullscreen?.();else document.exitFullscreen?.()}});
