@@ -1,0 +1,112 @@
+name: Extract DDLC sprite packs
+
+on:
+  push:
+    paths:
+      - "PC _ Computer - Doki Doki Literature Club - Characters - *.zip"
+      - ".asset-extraction-trigger"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Extract PNG sprites and build an index
+        run: |
+          python - <<'PY'
+          import json, re, zipfile
+          from pathlib import Path, PurePosixPath
+          from PIL import Image, ImageOps, ImageDraw
+          from io import BytesIO
+
+          root = Path(".")
+          output = root / "assets" / "characters"
+          previews = root / "assets" / "previews"
+          output.mkdir(parents=True, exist_ok=True)
+          previews.mkdir(parents=True, exist_ok=True)
+          index = []
+          packs = sorted(root.glob("PC _ Computer - Doki Doki Literature Club - Characters - *.zip"))
+
+          for archive in packs:
+              match = re.search(r"Characters - (.+)\.zip$", archive.name)
+              character = (match.group(1) if match else archive.stem).lower()
+              character = re.sub(r"[^a-z0-9_-]+", "-", character).strip("-")
+              target = output / character
+              target.mkdir(parents=True, exist_ok=True)
+              thumbs = []
+
+              with zipfile.ZipFile(archive) as zf:
+                  pngs = [item for item in zf.infolist()
+                          if not item.is_dir() and item.filename.lower().endswith(".png")]
+                  for number, item in enumerate(pngs, 1):
+                      relative = PurePosixPath(item.filename)
+                      safe_parts = [re.sub(r"[^A-Za-z0-9._ -]+", "_", p)
+                                    for p in relative.parts if p not in ("", ".", "..")]
+                      if not safe_parts:
+                          continue
+                      destination = target.joinpath(*safe_parts)
+                      destination.parent.mkdir(parents=True, exist_ok=True)
+                      data = zf.read(item)
+                      destination.write_bytes(data)
+                      try:
+                          im = Image.open(BytesIO(data)).convert("RGBA")
+                          width, height = im.size
+                          thumb = im.copy()
+                          thumb.thumbnail((150, 190))
+                          tile = Image.new("RGB", (170, 225), "white")
+                          tile.paste(thumb, ((170-thumb.width)//2, 5), thumb)
+                          draw = ImageDraw.Draw(tile)
+                          draw.text((6, 200), destination.name[:25], fill="black")
+                          thumbs.append(tile)
+                      except Exception:
+                          width = height = None
+                      index.append({
+                          "character": character,
+                          "file": destination.as_posix(),
+                          "source_zip": archive.name,
+                          "source_path": item.filename,
+                          "width": width,
+                          "height": height,
+                          "bytes": len(data)
+                      })
+
+              if thumbs:
+                  cols = 5
+                  rows = (len(thumbs) + cols - 1) // cols
+                  sheet = Image.new("RGB", (cols*170, rows*225), "#dedee5")
+                  for i, thumb in enumerate(thumbs):
+                      sheet.paste(thumb, ((i % cols)*170, (i // cols)*225))
+                  sheet.save(previews / f"{character}-contact-sheet.jpg", quality=85)
+
+          (root / "assets" / "sprite-index.json").write_text(
+              json.dumps(index, indent=2), encoding="utf-8")
+          print(f"Extracted {len(index)} PNG files from {len(packs)} ZIP packs.")
+          PY
+
+      - name: Install image library
+        run: python -m pip install --quiet pillow
+
+      - name: Commit extracted sprites
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/characters assets/previews assets/sprite-index.json
+          if git diff --cached --quiet; then
+            echo "No extracted asset changes."
+          else
+            git commit -m "Extract DDLC character sprite packs"
+            git push
+          fi
