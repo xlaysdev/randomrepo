@@ -1,209 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ARCANA — Gesture Spellcasting</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>NEON DRIVE — 3D Road Rush</title>
 <style>
-:root{--bg:#080a12;--panel:#111522;--line:#272d40;--text:#f4f4fb;--muted:#8e96ad;--aqua:#70f5db;--violet:#a88bff;--gold:#ffd36b}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif}
-body{background:radial-gradient(ellipse at 50% 45%,#172039 0%,#0a0d18 55%,#070910 100%)}
-#camera{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:.42;filter:saturate(.65) contrast(1.12)}
-#shade{position:fixed;inset:0;background:linear-gradient(90deg,#080a12e8 0%,#080a1280 35%,#080a1240 70%,#080a12b8 100%),linear-gradient(0deg,#080a12 0%,transparent 30%,transparent 75%,#080a12aa 100%)}
-#fx,#draw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
-#draw{pointer-events:auto;touch-action:none;cursor:crosshair}
-.shell{position:fixed;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,42px);pointer-events:none}
-header,.footer{display:flex;justify-content:space-between;align-items:center;gap:16px}
-.brand{display:flex;align-items:center;gap:12px}.sigil{width:38px;height:38px;border:1px solid #70f5db88;border-radius:50%;display:grid;place-items:center;color:var(--aqua);font-size:22px;box-shadow:0 0 28px #70f5db20}
-.brandname{font-size:13px;letter-spacing:.24em;font-weight:700}.sub{font:10px 'DM Mono';color:var(--muted);letter-spacing:.16em;margin-top:4px}
-.pill{border:1px solid var(--line);background:#0b0e19bb;border-radius:30px;padding:9px 13px;color:#c3c9d8;font:10px 'DM Mono';letter-spacing:.12em}
-main{display:flex;align-items:center;justify-content:space-between;gap:24px;flex:1}
-.intro{max-width:430px;pointer-events:none}.eyebrow{font:11px 'DM Mono';letter-spacing:.2em;color:var(--aqua);text-transform:uppercase}
-h1{font-size:clamp(48px,8vw,100px);line-height:.84;letter-spacing:-.085em;margin:16px 0 20px;font-weight:700}
-h1 span{color:var(--aqua)}.desc{max-width:330px;color:#aab1c4;font-size:15px;line-height:1.6}
-.instructions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.step{border:1px solid #30364b;background:#101522aa;padding:11px 13px;border-radius:12px;font-size:11px;color:#c7ccda}.step b{color:var(--aqua);font:11px 'DM Mono';margin-right:7px}
-.panel{width:min(310px,32vw);min-width:245px;padding:18px;border:1px solid #343b50;background:#0c101bdc;backdrop-filter:blur(18px);border-radius:18px;box-shadow:0 20px 80px #0005;pointer-events:auto}
-.paneltop{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.paneltitle{font:11px 'DM Mono';letter-spacing:.16em;color:#cbd1e0}.live{font:9px 'DM Mono';color:var(--aqua);letter-spacing:.12em}.live:before{content:'';display:inline-block;width:6px;height:6px;background:var(--aqua);border-radius:50%;margin-right:7px;box-shadow:0 0 10px var(--aqua)}
-.spell{display:flex;align-items:center;gap:12px;padding:11px;border:1px solid transparent;border-radius:12px;margin:5px 0;transition:.2s}.spell.active{border-color:#70f5db66;background:#70f5db0d}.glyph{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:20px;background:#ffffff0a}.spell strong{display:block;font-size:13px}.spell small{display:block;color:var(--muted);font:9px 'DM Mono';margin-top:4px;letter-spacing:.08em}
-.status{margin-top:14px;padding:13px;border-radius:12px;background:#070a12;border:1px solid #242a3b}.statuslabel{font:9px 'DM Mono';letter-spacing:.15em;color:var(--muted)}#status{font-size:13px;margin-top:7px;color:var(--aqua)}
-button{border:0;border-radius:10px;padding:12px 14px;background:var(--aqua);color:#07110f;font:700 11px 'DM Mono';letter-spacing:.1em;cursor:pointer;width:100%;margin-top:12px}button:disabled{opacity:.5;cursor:wait}
-.footer{font:10px 'DM Mono';letter-spacing:.12em;color:#8790a8}.hint{color:#c1c8d9}.cameraState{display:flex;align-items:center;gap:8px}
-#startOverlay{position:fixed;inset:0;display:grid;place-items:center;background:#080a12b8;backdrop-filter:blur(10px);z-index:5}
-.startbox{width:min(420px,calc(100% - 36px));padding:30px;border:1px solid #343b50;background:#101522;border-radius:20px;text-align:center;box-shadow:0 30px 100px #0009}
-.starticon{font-size:38px;color:var(--aqua)}.startbox h2{font-size:27px;letter-spacing:-.05em;margin:12px 0 8px}.startbox p{font-size:13px;color:#aab1c4;line-height:1.6}.startbox button{padding:15px}
-@media(max-width:760px){.shell{padding:18px}main{align-items:flex-end;padding-bottom:20px}.intro{max-width:55%}h1{font-size:clamp(43px,12vw,70px)}.desc{font-size:12px}.instructions{display:none}.panel{width:42%;min-width:0;padding:11px}.spell{gap:7px;padding:7px}.glyph{width:29px;height:29px;font-size:16px}.spell strong{font-size:11px}.spell small{font-size:8px}.status{padding:9px}#status{font-size:11px}.pill{font-size:8px}.footer{font-size:8px}}
-@media(max-width:760px){
-html,body{height:100%;min-height:100%;overflow:auto}
-.shell{position:absolute;min-height:100svh;height:auto;gap:22px;padding:16px}
-header{align-items:flex-start}.brand{gap:8px}.sigil{width:32px;height:32px}.brandname{font-size:12px}.sub{font-size:8px;letter-spacing:.1em}
-main{flex:1;min-height:calc(100svh - 150px);align-items:center;flex-direction:column;justify-content:center;gap:18px;padding:10px 0 18px}
-.intro{max-width:100%;width:100%;text-align:center}.eyebrow{font-size:9px}h1{font-size:clamp(46px,13vw,68px);margin:10px 0}.desc{font-size:12px;max-width:340px;margin:auto}
-.panel{width:100%;max-width:440px;min-width:0;padding:13px}.paneltop{margin-bottom:8px}.spell{display:inline-flex;width:calc(50% - 5px);vertical-align:top;margin:3px 1px;padding:8px}.glyph{width:30px;height:30px}.spell strong{font-size:11px}.spell small{font-size:7px;letter-spacing:0}
-.status{margin-top:8px;padding:9px}#status{font-size:11px}
-.footer{padding-bottom:env(safe-area-inset-bottom);font-size:8px}
-#startOverlay{padding:18px}.startbox{padding:22px 18px}
-#camera{object-fit:cover}
-}
-@media(max-width:380px){.spell{width:100%}.intro h1{font-size:46px}.pill{padding:7px 9px}}
-@media(orientation:landscape) and (max-height:500px){
-.shell{padding:10px 16px}main{flex-direction:row;min-height:0}.intro{width:48%;text-align:left}.panel{width:48%;max-width:380px}.instructions{display:none}h1{font-size:42px}.desc{margin:0}
-}
-
-#uiToggle{position:fixed;z-index:4;top:16px;right:16px;width:auto;margin:0;padding:10px 13px;border:1px solid #70f5db66;background:#0b0e19dd;color:var(--aqua);backdrop-filter:blur(12px);border-radius:10px;font:10px 'DM Mono';letter-spacing:.1em}
-body.clean-ui .shell header,body.clean-ui .shell main,body.clean-ui .shell .footer{opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
-body.clean-ui #shade{opacity:.18}
-body.clean-ui #draw{pointer-events:none}
-@media(max-width:760px){#uiToggle{top:10px;right:10px;padding:9px 10px;font-size:9px}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080d18;color:#f5f7ff;font-family:Inter,system-ui,Arial,sans-serif;touch-action:none}canvas{display:block}
+#hud{position:fixed;inset:0;pointer-events:none;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-weight:900;letter-spacing:.16em;font-size:13px;text-shadow:0 2px 14px #000}.brand span{color:#42f5d2}.stats{display:flex;gap:8px}.stat{background:#0b1427bb;border:1px solid #27364c;border-radius:12px;padding:10px 13px;min-width:84px;backdrop-filter:blur(8px)}.stat label{display:block;font-size:9px;color:#9fb1c8;letter-spacing:.14em}.stat strong{font-size:19px;font-weight:800}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end}.speedbox{background:#0b1427bb;border:1px solid #27364c;border-radius:18px;padding:12px 16px;backdrop-filter:blur(8px)}#speed{font-size:clamp(32px,7vw,52px);font-weight:900;line-height:1}#speedunit{font-size:10px;color:#a7b7ca;letter-spacing:.15em}.nitro{width:150px;margin-top:8px;height:8px;background:#263249;border-radius:20px;overflow:hidden}.nitro div{height:100%;width:100%;background:linear-gradient(90deg,#43e6c5,#62a7ff);transition:width .1s}.hint{font-size:10px;color:#c1cad8;text-align:right;letter-spacing:.12em;text-shadow:0 2px 6px #000}
+#overlay{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(#07101acc,#070a12dd);z-index:5;padding:20px}
+.card{width:min(520px,100%);text-align:center;border:1px solid #30435a;border-radius:22px;background:#0d1628ee;padding:clamp(20px,5vw,36px);box-shadow:0 20px 90px #0008}
+.logo{font-size:12px;letter-spacing:.2em;font-weight:900;color:#45efd0}.card h1{margin:12px 0 8px;font-size:clamp(38px,9vw,64px);line-height:.9;letter-spacing:-.07em}.card h1 em{font-style:normal;color:#4af0d1}.card p{color:#b2bfd1;line-height:1.55;font-size:13px;margin:18px auto;max-width:380px}
+button{border:0;cursor:pointer;color:#041512;background:#45efd0;font-weight:900;letter-spacing:.1em;border-radius:12px;padding:15px 22px;font-size:12px}button:active{transform:scale(.97)}.secondary{background:#19263b;color:#dfe9f7;border:1px solid #34455d;margin-top:9px}
+#mobile{position:fixed;inset:0;pointer-events:none;display:none;justify-content:space-between;align-items:flex-end;padding:20px 18px calc(18px + env(safe-area-inset-bottom));z-index:3}
+.pad{display:flex;gap:12px;pointer-events:auto}.control{width:clamp(62px,18vw,88px);height:clamp(62px,18vw,88px);border-radius:50%;background:#122239cc;border:1px solid #55708b;color:#fff;display:grid;place-items:center;font-size:23px;font-weight:800;backdrop-filter:blur(8px);user-select:none;-webkit-user-select:none;touch-action:none}
+.control.gas{width:clamp(70px,20vw,98px);height:clamp(70px,20vw,98px);background:#42e6c5dd;color:#05201a;border-color:#72ffe8}.control.brake{background:#e7596bcc;border-color:#ff9aa6}
+#toast{position:fixed;top:38%;left:50%;transform:translate(-50%,-50%);font-weight:900;font-size:clamp(22px,6vw,42px);letter-spacing:.08em;color:#ff6c8b;text-shadow:0 0 24px #ff4768;opacity:0;pointer-events:none;transition:opacity .2s}
+@media(max-width:700px){#hud{padding:12px}.stat{padding:8px 10px;min-width:70px}.stat strong{font-size:16px}.bottom{align-items:flex-end}.hint{display:none}.speedbox{padding:10px 12px}#mobile{display:flex}.nitro{width:100px}}
 </style>
 </head>
 <body>
-<video id="camera" autoplay playsinline muted></video><div id="shade"></div>
-<canvas id="fx"></canvas><canvas id="draw"></canvas>
-<button id="uiToggle" type="button" aria-pressed="false">HIDE INTERFACE</button>
-<div class="shell">
-<header><div class="brand"><div class="sigil">✧</div><div><div class="brandname">ARCANA</div><div class="sub">GESTURE-BASED SPELL ENGINE</div></div></div><div class="pill">CAMERA MODE / <span id="camlabel">OFFLINE</span></div></header>
-<main><section class="intro"><div class="eyebrow">✦ YOUR HANDS ARE THE WAND</div><h1>DRAW<br>IT.<br><span>CAST IT.</span></h1><div class="desc">Use your camera to trace a symbol in the air. Pinch your fingers to draw, then release to unleash the spell.</div><div class="instructions"><div class="step"><b>01</b> PINCH TO DRAW</div><div class="step"><b>02</b> TRACE A GLYPH</div><div class="step"><b>03</b> RELEASE TO CAST</div></div></section>
-<aside class="panel"><div class="paneltop"><div class="paneltitle">SPELL GRIMOIRE</div><div class="live">SYSTEM READY</div></div>
-<div class="spell active" data-spell="fire"><div class="glyph">🔥</div><div><strong>Fireburst</strong><small>ZIGZAG / LIGHTNING</small></div></div>
-<div class="spell" data-spell="shield"><div class="glyph">🛡️</div><div><strong>Aegis</strong><small>CIRCLE / LOOP</small></div></div>
-<div class="spell" data-spell="lightning"><div class="glyph">⚡</div><div><strong>Thunder</strong><small>SHARP V / ZIGZAG</small></div></div>
-<div class="spell" data-spell="portal"><div class="glyph">🌀</div><div><strong>Void Gate</strong><small>SPIRAL / BIG LOOP</small></div></div>
-<div class="status"><div class="statuslabel">CURRENT ACTION</div><div id="status">Waiting for camera...</div></div>
-<button id="start" type="button">ACTIVATE CAMERA</button>
-</aside></main>
-<div class="footer"><div class="cameraState"><span>◉</span><span id="footerstatus">CAMERA NOT CONNECTED</span></div><div class="hint">NO WAND REQUIRED ✦</div></div>
-</div>
-<div id="startOverlay"><div class="startbox"><div class="starticon">✧</div><h2>Awaken your magic.</h2><p>Allow camera access, hold your thumb and index finger together, then draw a symbol in the air. Release to cast.</p><button id="begin">ENABLE CAMERA & START</button><button id="touchMode" type="button" style="background:#252d42;color:#e9edfa;margin-top:9px">USE TOUCH DRAWING INSTEAD</button><p style="font-size:10px">Camera runs locally in this tab. Touch drawing works without camera permission.</p></div></div>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<div id="hud"><div class="top"><div class="brand">NEON <span>DRIVE</span> / ROAD RUSH</div><div class="stats"><div class="stat"><label>DISTANCE</label><strong id="distance">0 m</strong></div><div class="stat"><label>BEST</label><strong id="best">0 m</strong></div></div></div><div class="bottom"><div class="speedbox"><div><span id="speed">0</span> <span id="speedunit">KM/H</span></div><div class="nitro"><div id="nitrobar"></div></div></div><div class="hint">WASD / ARROWS DRIVE · SPACE DRIFT · SHIFT NITRO</div></div></div>
+<div id="mobile"><div class="pad"><div class="control" data-key="left">◀</div><div class="control" data-key="right">▶</div></div><div class="pad"><div class="control brake" data-key="brake">▼</div><div class="control gas" data-key="gas">▲</div></div></div>
+<div id="toast">CRASH!</div>
+<div id="overlay"><div class="card"><div class="logo">NEON DRIVE // ARCADE</div><h1>ROAD<br><em>RUSH</em></h1><p>Drive as far as you can. Dodge traffic, grab the road, hit nitro and don't wipe out. Keyboard on PC, buttons on your phone.</p><button id="start">START ENGINE</button><button id="controls" class="secondary">CONTROLS: WASD / ARROWS · SPACE DRIFT · SHIFT NITRO</button></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-(() => {
-'use strict';
-const video=document.getElementById('camera'), draw=document.getElementById('draw'), fx=document.getElementById('fx');
-const ctx=draw.getContext('2d'), fctx=fx.getContext('2d');
-const statusEl=document.getElementById('status'), camlabel=document.getElementById('camlabel'), footerstatus=document.getElementById('footerstatus'), overlay=document.getElementById('startOverlay');
-const begin=document.getElementById('begin'), startBtn=document.getElementById('start'), touchBtn=document.getElementById('touchMode'), uiToggle=document.getElementById('uiToggle');
-let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;
-let smoothedTip=null,pinchOnFrames=0,pinchOffFrames=0,missingSince=0,lastHandSeen=0;
-const colors={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'};
-function setStatus(s){statusEl.textContent=s}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastInference=0;lastRender=0}});
-function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
-function resize(){
- const dpr=Math.min(window.devicePixelRatio||1,window.innerWidth<760?1.35:1.75),w=window.innerWidth,h=window.innerHeight;
- for(const c of [draw,fx]){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.width=w+'px';c.style.height=h+'px'}
- ctx.setTransform(dpr,0,0,dpr,0,0);fctx.setTransform(dpr,0,0,dpr,0,0);
+(()=>{ 'use strict';
+const overlay=document.getElementById('overlay'),startBtn=document.getElementById('start'),speedEl=document.getElementById('speed'),distanceEl=document.getElementById('distance'),bestEl=document.getElementById('best'),nitrobar=document.getElementById('nitrobar'),toast=document.getElementById('toast');
+const keys={left:false,right:false,gas:false,brake:false,nitro:false,drift:false};let scene,camera,renderer,player,carGroup,roadSegments=[],traffic=[],props=[],running=false,gameOver=false,velocity=0,steer=0,playerX=0,distance=0,nitro=100,score=0,crashTimer=0,lastTime=0,spawnClock=0,worldSpeed=0,roadWidth=12,lanes=[-3.6,0,3.6],best=0,lights=[];
+try{best=Number(localStorage.getItem('neondrive-best')||0)}catch(e){}bestEl.textContent=Math.floor(best)+' m';
+function mat(color,rough=.7,metal=0){return new THREE.MeshStandardMaterial({color,roughness:rough,metalness:metal})}
+const m={road:mat(0x242b38),line:mat(0xe5eaf0),grass:mat(0x152a24),car:mat(0x27d9c1,.35,.25),dark:mat(0x111927),glass:mat(0x172b43,.2,.2),wheel:mat(0x090b10),lamp:mat(0xffdc8c),red:mat(0xff536a),building:mat(0x29364a),white:mat(0xe4ebf8),yellow:mat(0xffca4b)};
+function box(w,h,d,material,x=0,y=0,z=0){const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);mesh.position.set(x,y,z);mesh.castShadow=true;mesh.receiveShadow=true;return mesh}
+function init(){scene=new THREE.Scene();scene.background=new THREE.Color(0x87a9d1);scene.fog=new THREE.Fog(0x87a9d1,90,280);
+ camera=new THREE.PerspectiveCamera(66,innerWidth/innerHeight,.1,500);camera.position.set(0,5.6,10.5);
+ renderer=new THREE.WebGLRenderer({antialias:false,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=false;renderer.outputEncoding=THREE.sRGBEncoding;document.body.appendChild(renderer.domElement);
+ const hemi=new THREE.HemisphereLight(0xd7e9ff,0x26341c,2.0);scene.add(hemi);const sun=new THREE.DirectionalLight(0xffe4b6,2);sun.position.set(-25,40,-60);scene.add(sun);
+ const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500),m.grass);ground.rotation.x=-Math.PI/2;ground.position.y=-.08;scene.add(ground);
+ createCar();for(let i=0;i<8;i++)createRoad(i*48-80);for(let i=0;i<22;i++)createSideProps();for(let i=0;i<5;i++)spawnTraffic(true);
+ window.addEventListener('resize',resize);requestAnimationFrame(loop);
 }
-addEventListener('resize',resize);resize();
-function clearPath(){path=[];lastPoint=null;ctx.clearRect(0,0,innerWidth,innerHeight)}
-function drawPath(){
- ctx.clearRect(0,0,innerWidth,innerHeight);if(path.length<2)return;
- ctx.save();ctx.lineCap='round';ctx.lineJoin='round';ctx.shadowBlur=18;ctx.shadowColor='#70f5db';ctx.strokeStyle='#a9ffed';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);
- for(let i=1;i<path.length;i++)ctx.lineTo(path[i].x,path[i].y);ctx.stroke();ctx.restore();
+function createCar(){carGroup=new THREE.Group();player=new THREE.Group();carGroup.add(player);scene.add(carGroup);
+ player.add(box(1.9,.58,3.8,m.car,0,.72,0));player.add(box(1.45,.75,1.65,m.glass,0,1.3,-.3));player.add(box(1.3,.12,.7,m.white,0,1.65,-.65));
+ player.add(box(1.65,.15,.35,m.dark,0,.47,1.75));player.add(box(1.65,.15,.35,m.dark,0,.47,-1.75));
+ for(const x of [-1,1])for(const z of [-1.25,1.25]){const wheel=new THREE.Mesh(new THREE.CylinderGeometry(.43,.43,.26,12),m.wheel);wheel.rotation.z=Math.PI/2;wheel.position.set(x*1.02,.48,z);player.add(wheel)}
+ for(const x of [-.62,.62]){const head=box(.34,.16,.1,m.white,x,.85,-1.91);head.material=mat(0xefffff,.2);const tail=box(.32,.14,.1,m.red,x,.75,1.91)}
+ player.position.set(0,0,0);carGroup.position.z=5;
 }
-function classify(points){
- if(points.length<8)return'fire';
- let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
- points.forEach(p=>{minX=Math.min(minX,p.x);maxX=Math.max(maxX,p.x);minY=Math.min(minY,p.y);maxY=Math.max(maxY,p.y)});
- const w=maxX-minX,h=maxY-minY,closure=dist(points[0],points[points.length-1]),ratio=closure/Math.max(1,Math.hypot(w,h));
- let turns=0;
- for(let i=2;i<points.length;i++){const a=Math.atan2(points[i-1].y-points[i-2].y,points[i-1].x-points[i-2].x),b=Math.atan2(points[i].y-points[i-1].y,points[i].x-points[i-1].x),d=Math.atan2(Math.sin(b-a),Math.cos(b-a));if(Math.abs(d)>.8)turns++}
- if(ratio<.25&&w>55&&h>55)return'shield';
- if(turns>5&&w>75&&h>75)return'portal';
- if(turns>=2||h>w*.75)return'lightning';
- return'fire';
+function createRoad(z){const seg=new THREE.Group();seg.position.z=z;seg.add(box(roadWidth,.12,48,m.road,0,0,0));for(const x of [-roadWidth/2-.15,roadWidth/2+.15])seg.add(box(.25,.22,48,m.white,x,.06,0));
+ for(let x=-3.6;x<=3.6;x+=3.6){if(x!==0)for(let z0=-22;z0<24;z0+=12)seg.add(box(.12,.03,5,m.line,x,.08,z0)}
+ scene.add(seg);roadSegments.push(seg)}
+function createSideProps(){const side=Math.random()<.5?-1:1,z=-Math.random()*260-50;const x=side*(10+Math.random()*18);const group=new THREE.Group();group.position.set(x,0,z);
+ if(Math.random()<.6){const trunk=box(.45,2,.45,mat(0x59412c),0,1,0);const crown=new THREE.Mesh(new THREE.ConeGeometry(2.3,4,7),mat(0x1d6848));crown.position.y=3.6;group.add(trunk,crown)}else{const h=5+Math.random()*18,w=4+Math.random()*7;group.add(box(w,h,w,m.building,0,h/2,0));group.add(box(w*.8,.2,w*.8,m.white,0,h*.65,0));}
+ scene.add(group);props.push(group)}
+function createTrafficCar(color){const g=new THREE.Group(),body=box(1.75,.55,3.1,mat(color,.45,.15),0,.7,0),cab=box(1.35,.7,1.45,m.glass,0,1.18,-.2);g.add(body,cab);for(const x of [-.9,.9])for(const z of [-1,1]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,.22,10),m.wheel);w.rotation.z=Math.PI/2;w.position.set(x,.38,z);g.add(w)}return g}
+function spawnTraffic(initial=false){const lane=lanes[Math.floor(Math.random()*lanes.length)];const colors=[0xff4d66,0xffc94a,0x6aa7ff,0x9a82ff,0xe4eaf4,0x42d7aa];const car=createTrafficCar(colors[Math.floor(Math.random()*colors.length)]);car.position.set(lane,.0,initial?-120-Math.random()*200:-180-Math.random()*60);scene.add(car);traffic.push({mesh:car,lane,passed:false})}
+function reset(){traffic.forEach(t=>scene.remove(t.mesh));traffic=[];roadSegments.forEach((r,i)=>r.position.z=i*48-80);props.forEach(p=>{p.position.z=-Math.random()*260-40;p.position.x=(p.position.x<0?-1:1)*(10+Math.random()*18)});velocity=0;steer=0;playerX=0;distance=0;nitro=100;score=0;spawnClock=0;gameOver=false;running=true;overlay.style.display='none';keys.gas=false;keys.brake=false;keys.nitro=false;keys.drift=false}
+function crash(){gameOver=true;running=false;velocity=0;overlay.style.display='grid';document.querySelector('.logo').textContent='RUN ENDED';document.querySelector('.card h1').innerHTML='CRASH<br><em>OUT</em>';document.querySelector('.card p').textContent='Distance: '+Math.floor(distance)+' m. Hit START to jump back into the road.';startBtn.textContent='RESTART';toast.style.opacity=1;setTimeout(()=>toast.style.opacity=0,850);if(distance>best){best=distance;bestEl.textContent=Math.floor(best)+' m';try{localStorage.setItem('neondrive-best',String(Math.floor(best)))}catch(e){}}}
+function update(dt){if(!running)return;dt=Math.min(dt,.04);
+ const acceleration=keys.gas?26:0,braking=keys.brake?42:0,boost=keys.nitro&&nitro>0&&keys.gas;
+ velocity+=acceleration*dt;velocity-=braking*dt;if(!keys.gas&&!keys.brake)velocity-=10*dt;velocity=Math.max(-9,Math.min(boost?52:34,velocity));if(boost)nitro=Math.max(0,nitro-27*dt);else nitro=Math.min(100,nitro+8*dt);
+ worldSpeed=velocity;distance+=Math.max(0,velocity)*dt*2.5;
+ const steerTarget=(keys.left?-1:0)+(keys.right?1:0);steer+=(steerTarget-steer)*Math.min(1,dt*7);playerX+=steer*(keys.drift?9:6.2)*dt*Math.max(.25,Math.abs(velocity)/18);playerX=Math.max(-5.4,Math.min(5.4,playerX));player.position.x=playerX;player.rotation.y=-steer*.15;player.rotation.z=-steer*(keys.drift?.16:.05);
+ camera.position.x+=(playerX*.35-camera.position.x)*dt*3;camera.position.y+=(5.8-camera.position.y)*dt*2;camera.position.z=10.5;camera.lookAt(playerX*.2,1,-10);
+ roadSegments.forEach(s=>{s.position.z+=velocity*dt*2.2;if(s.position.z>30)s.position.z-=384});
+ props.forEach(p=>{p.position.z+=velocity*dt*2.2;if(p.position.z>24){p.position.z=-270-Math.random()*100;p.position.x=(p.position.x<0?-1:1)*(10+Math.random()*18)}});
+ traffic.forEach(t=>{t.mesh.position.z+=velocity*dt*2.2;if(!t.passed&&t.mesh.position.z>7){t.passed=true;score+=100}if(t.mesh.position.z>25){scene.remove(t.mesh);t.dead=true}});
+ traffic=traffic.filter(t=>!t.dead);
+ if(traffic.length<5){spawnClock+=dt;if(spawnClock>1.1){spawnTraffic();spawnClock=0}}
+ for(const t of traffic){if(Math.abs(t.mesh.position.z-player.position.z)<2.7&&Math.abs(t.mesh.position.x-playerX)<1.7&&velocity>4){crash();break}}
+ speedEl.textContent=Math.round(Math.abs(velocity)*5.4);distanceEl.textContent=Math.floor(distance)+' m';nitrobar.style.width=nitro+'%';
 }
-function selectSpell(s){document.querySelectorAll('.spell').forEach(e=>e.classList.toggle('active',e.dataset.spell===s))}
-document.querySelectorAll('.spell').forEach(e=>e.addEventListener('click',()=>{const s=e.dataset.spell;selectSpell(s);setStatus('Selected '+e.querySelector('strong').textContent)}));
-function cast(points){
- if(points.length<2)return;
- const spell=classify(points),cx=points.reduce((a,p)=>a+p.x,0)/points.length,cy=points.reduce((a,p)=>a+p.y,0)/points.length,color=colors[spell],count=spell==='portal'?110:70;
- for(let i=0;i<count&&particles.length<220;i++){const a=Math.random()*Math.PI*2,v=spell==='portal'?1+Math.random()*2:2+Math.random()*6;particles.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,size:2+Math.random()*4,color})}
- rings.push({x:cx,y:cy,r:8,life:1,color,kind:spell});
- const names={fire:'FIREBURST IGNITED',shield:'AEGIS SHIELD FORMED',lightning:'THUNDER RELEASED',portal:'VOID GATE OPENED'};
- setStatus(names[spell]);selectSpell(spell);clearPath();
-}
-function renderFX(now){
- requestAnimationFrame(renderFX);
- if(document.hidden||now-lastRender<33)return;
- lastRender=now;fctx.clearRect(0,0,innerWidth,innerHeight);fctx.shadowBlur=0;
- for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.97;p.vy*=.97;if(p.color===colors.fire)p.vy+=.035;p.life-=.025;if(p.life<=0){particles.splice(i,1);continue}fctx.globalAlpha=p.life;fctx.fillStyle=p.color;fctx.beginPath();fctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);fctx.fill()}
- for(let i=rings.length-1;i>=0;i--){const r=rings[i];r.r+=r.kind==='portal'?2:3.5;r.life-=.025;if(r.life<=0){rings.splice(i,1);continue}fctx.globalAlpha=r.life;fctx.strokeStyle=r.color;fctx.lineWidth=3;fctx.beginPath();fctx.arc(r.x,r.y,r.r,0,Math.PI*2);fctx.stroke();if(r.kind==='portal'){fctx.beginPath();fctx.arc(r.x,r.y,r.r*.65,0,Math.PI*2);fctx.stroke()}}
- fctx.globalAlpha=1;
-}
-requestAnimationFrame(renderFX);
-function beginStroke(p){drawing=true;path=[p];lastPoint=p;setStatus('Tracing a glyph...');drawPath()}
-function addPoint(p){if((!lastPoint||dist(p,lastPoint)>3)&&path.length<420){path.push(p);lastPoint=p;drawPath()}}
-function endStroke(){if(!drawing)return;drawing=false;if(path.length>5)cast(path);else{clearPath();setStatus('Draw a bigger symbol')}}
-function onResults(results){
- if(!running||manualMode)return;
- const lm=results.multiHandLandmarks&&results.multiHandLandmarks[0];
- const now=performance.now();
- if(!lm){
-  pinchOnFrames=0;pinchOffFrames=0;
-  if(!missingSince)missingSince=now;
-  if(drawing&&now-missingSince>180){endStroke();smoothedTip=null;setStatus('Hand lost — show it to the camera');}
-  else if(!drawing&&now-lastHandSeen>700)setStatus('Show your hand to the camera');
-  return;
- }
- missingSince=0;lastHandSeen=now;
- // Scale pinch distance against palm width so it works at different camera distances.
- const palmWidth=Math.max(dist(lm[5],lm[17]),0.001);
- const pinchRatio=dist(lm[4],lm[8])/palmWidth;
- const pinch= drawing ? pinchRatio<0.48 : pinchRatio<0.32;
- const raw={x:(1-lm[8].x)*innerWidth,y:lm[8].y*innerHeight};
- // Smooth fingertip jitter while keeping faster movements responsive.
- if(!smoothedTip)smoothedTip=raw;
- else{
-  const movement=dist(raw,smoothedTip);
-  const alpha=movement>24?0.68:movement>8?0.48:0.30;
-  smoothedTip={x:smoothedTip.x+(raw.x-smoothedTip.x)*alpha,y:smoothedTip.y+(raw.y-smoothedTip.y)*alpha};
- }
- if(pinch){
-  pinchOffFrames=0;pinchOnFrames++;
-  if(!drawing&&pinchOnFrames>=2){beginStroke(smoothedTip);pinchOnFrames=0}
-  else if(drawing)addPoint(smoothedTip);
- }else{
-  pinchOnFrames=0;
-  if(drawing){pinchOffFrames++;if(pinchOffFrames>=2){pinchOffFrames=0;endStroke()}}
- }
-}
-function enableTouchMode(){
- manualMode=true;running=false;cancelAnimationFrame(raf);
- if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
- video.style.display='none';camlabel.textContent='TOUCH';footerstatus.textContent='TOUCH DRAWING ACTIVE';
- overlay.style.display='none';startBtn.textContent='TOUCH MODE ACTIVE';startBtn.disabled=true;
- setStatus('Touch and drag anywhere to draw a spell');
- draw.style.pointerEvents='auto';
-}
-draw.addEventListener('pointerdown',e=>{if(!manualMode)return;if(e.pointerType==='mouse'&&e.button!==0)return;draw.setPointerCapture(e.pointerId);beginStroke({x:e.clientX,y:e.clientY})});
-draw.addEventListener('pointermove',e=>{if(manualMode&&drawing)addPoint({x:e.clientX,y:e.clientY})});
-draw.addEventListener('pointerup',()=>{if(manualMode)endStroke()});
-draw.addEventListener('pointercancel',()=>{if(manualMode)endStroke()});
-async function startCamera(){
- begin.disabled=true;begin.textContent='CONNECTING CAMERA...';setStatus('Requesting camera permission...');
- try{
-  if(!window.isSecureContext)throw new Error('Open this site using its HTTPS GitHub Pages address.');
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('This browser does not provide camera access.');
-  if(typeof window.Hands!=='function')throw new Error('Hand tracking could not load. Check your internet connection or use touch mode.');
-  stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'user'},width:{ideal:640},height:{ideal:480}}});
-  video.srcObject=stream;video.muted=true;video.playsInline=true;await video.play();
-  hands=new window.Hands({locateFile:file=>'https://cdn.jsdelivr.net/npm/@mediapipe/hands/'+file});
-  hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.65,minTrackingConfidence:.65});
-  hands.onResults(onResults);running=true;
-  const process=async now=>{if(!running||manualMode)return;if(!document.hidden&&now-lastInference>=42&&video.readyState>=2&&!frameBusy){lastInference=now;frameBusy=true;try{await hands.send({image:video})}catch(err){console.warn('Hand tracking frame failed',err)}finally{frameBusy=false}}raf=requestAnimationFrame(process)};
-  await new Promise(resolve=>{if(video.readyState>=2)resolve();else video.addEventListener('loadeddata',resolve,{once:true})});
-  raf=requestAnimationFrame(process);overlay.style.display='none';camlabel.textContent='ONLINE';footerstatus.textContent='HAND TRACKING ACTIVE';setStatus('Show your hand, then pinch thumb + index finger');smoothedTip=null;pinchOnFrames=0;pinchOffFrames=0;missingSince=0;lastHandSeen=0;startBtn.textContent='CAMERA ACTIVE';startBtn.disabled=true;draw.style.pointerEvents='none';
- }catch(err){
-  console.error(err);running=false;
-  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
-  const message=err.name==='NotAllowedError'?'Camera permission denied. Try touch mode.':err.message||'Camera unavailable. Try touch mode.';
-  setStatus(message);begin.disabled=false;begin.textContent='TRY CAMERA AGAIN';startBtn.textContent='CAMERA UNAVAILABLE';
- }
-}
-begin.addEventListener('click',startCamera);startBtn.addEventListener('click',startCamera);touchBtn.addEventListener('click',enableTouchMode);
-uiToggle.addEventListener('click',()=>{const hidden=document.body.classList.toggle('clean-ui');uiToggle.textContent=hidden?'SHOW INTERFACE':'HIDE INTERFACE';uiToggle.setAttribute('aria-pressed',String(hidden))});
-addEventListener('keydown',e=>{if(e.key.toLowerCase()==='h'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA')uiToggle.click()});
+function loop(now){const dt=lastTime?(now-lastTime)/1000:0;lastTime=now;update(dt);renderer.render(scene,camera);requestAnimationFrame(loop)}
+function resize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.5))}
+function setKey(key,on){if(key==='left')keys.left=on;else if(key==='right')keys.right=on;else if(key==='gas')keys.gas=on;else if(key==='brake')keys.brake=on;else if(key==='nitro')keys.nitro=on;else if(key==='drift')keys.drift=on}
+addEventListener('keydown',e=>{if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')setKey('left',true);if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')setKey('right',true);if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')setKey('gas',true);if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')setKey('brake',true);if(e.key==='Shift')setKey('nitro',true);if(e.key===' ')setKey('drift',true)});
+addEventListener('keyup',e=>{if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')setKey('left',false);if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')setKey('right',false);if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')setKey('gas',false);if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')setKey('brake',false);if(e.key==='Shift')setKey('nitro',false);if(e.key===' ')setKey('drift',false)});
+document.querySelectorAll('.control').forEach(el=>{const key=el.dataset.key;const down=e=>{e.preventDefault();setKey(key,true)};const up=e=>{e.preventDefault();setKey(key,false)};el.addEventListener('pointerdown',down);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);el.addEventListener('pointerleave',up)});
+startBtn.addEventListener('click',()=>{document.querySelector('.logo').textContent='NEON DRIVE // ARCADE';document.querySelector('.card h1').innerHTML='ROAD<br><em>RUSH</em>';document.querySelector('.card p').textContent='Drive as far as you can. Dodge traffic, grab the road, hit nitro and don’t wipe out. Keyboard on PC, buttons on your phone.';startBtn.textContent='START ENGINE';reset()});
+init();
 })();
 </script>
-
 </body></html>
