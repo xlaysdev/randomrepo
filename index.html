@@ -16,7 +16,7 @@ button{border:0;cursor:pointer;color:#041512;background:#45efd0;font-weight:900;
 .pad{display:flex;gap:12px;pointer-events:auto}.control{width:clamp(62px,18vw,88px);height:clamp(62px,18vw,88px);border-radius:50%;background:#122239cc;border:1px solid #55708b;color:#fff;display:grid;place-items:center;font-size:23px;font-weight:800;backdrop-filter:blur(8px);user-select:none;-webkit-user-select:none;touch-action:none}
 .control.gas{width:clamp(70px,20vw,98px);height:clamp(70px,20vw,98px);background:#42e6c5dd;color:#05201a;border-color:#72ffe8}.control.brake{background:#e7596bcc;border-color:#ff9aa6}
 #toast{position:fixed;top:38%;left:50%;transform:translate(-50%,-50%);font-weight:900;font-size:clamp(22px,6vw,42px);letter-spacing:.08em;color:#ff6c8b;text-shadow:0 0 24px #ff4768;opacity:0;pointer-events:none;transition:opacity .2s}
-@media(max-width:700px){#hud{padding:12px}.stat{padding:8px 10px;min-width:70px}.stat strong{font-size:16px}.bottom{align-items:flex-end}.hint{display:none}.speedbox{padding:10px 12px}#mobile{display:flex}.nitro{width:100px}}
+@media(max-width:700px){#hud{padding:12px}.stat{padding:8px 10px;min-width:70px}.stat strong{font-size:16px}.bottom{position:absolute;left:12px;bottom:calc(112px + env(safe-area-inset-bottom));align-items:flex-end}.hint{display:none}.speedbox{padding:10px 12px}#mobile{display:flex}.nitro{width:100px}}
 </style>
 </head>
 <body>
@@ -69,7 +69,7 @@ function update(dt){if(!running)return;dt=Math.min(dt,.04);
  traffic.forEach(t=>{t.mesh.position.z+=velocity*dt*2.2;if(!t.passed&&t.mesh.position.z>7){t.passed=true;score+=100}if(t.mesh.position.z>25){scene.remove(t.mesh);t.dead=true}});
  traffic=traffic.filter(t=>!t.dead);
  if(traffic.length<5){spawnClock+=dt;if(spawnClock>1.1){spawnTraffic();spawnClock=0}}
- for(const t of traffic){if(Math.abs(t.mesh.position.z-player.position.z)<2.7&&Math.abs(t.mesh.position.x-playerX)<1.7&&velocity>4){crash();break}}
+ for(const t of traffic){if(Math.abs(t.mesh.position.z-carGroup.position.z)<2.7&&Math.abs(t.mesh.position.x-playerX)<1.7&&velocity>4){crash();break}}
  speedEl.textContent=Math.round(Math.abs(velocity)*5.4);distanceEl.textContent=Math.floor(distance)+' m';nitrobar.style.width=nitro+'%';
 }
 function loop(now){const dt=lastTime?(now-lastTime)/1000:0;lastTime=now;update(dt);renderer.render(scene,camera);requestAnimationFrame(loop)}
