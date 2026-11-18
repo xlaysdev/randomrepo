@@ -82,7 +82,8 @@ const video=document.getElementById('camera'), draw=document.getElementById('dra
 const ctx=draw.getContext('2d'), fctx=fx.getContext('2d');
 const statusEl=document.getElementById('status'), camlabel=document.getElementById('camlabel'), footerstatus=document.getElementById('footerstatus'), overlay=document.getElementById('startOverlay');
 const begin=document.getElementById('begin'), startBtn=document.getElementById('start'), touchBtn=document.getElementById('touchMode'), uiToggle=document.getElementById('uiToggle');
-let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;\nlet smoothedTip=null,pinchOnFrames=0,pinchOffFrames=0,missingSince=0,lastHandSeen=0;
+let hands=null, stream=null, drawing=false, path=[], lastPoint=null, particles=[], rings=[], running=false, manualMode=false, frameBusy=false, raf=0,lastInference=0,lastRender=0;
+let smoothedTip=null,pinchOnFrames=0,pinchOffFrames=0,missingSince=0,lastHandSeen=0;
 const colors={fire:'#ff985f',shield:'#70f5db',lightning:'#c6a2ff',portal:'#8d72ff'};
 function setStatus(s){statusEl.textContent=s}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){lastInference=0;lastRender=0}});
