@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHAT IF IT WAS 2X?</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#090b13;color:#f6f7fb;font-family:'Space Grotesk',sans-serif}
+#scene{position:fixed;inset:0}canvas{display:block}
+.hud{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(20px,4vw,54px)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.kicker{font:500 11px 'DM Mono',monospace;letter-spacing:.22em;color:#9ba5bd;text-transform:uppercase}
+h1{font-size:clamp(42px,8vw,104px);line-height:.86;letter-spacing:-.075em;margin:13px 0 0;font-weight:700;text-transform:uppercase}
+h1 span{color:#e8ff55}
+.tag{border:1px solid #34394b;border-radius:99px;padding:10px 14px;font:11px 'DM Mono',monospace;color:#c6cadd;letter-spacing:.08em;white-space:nowrap;background:#11152299}
+.bottom{display:flex;justify-content:space-between;align-items:end;gap:20px}
+.caption{font-size:clamp(13px,1.6vw,17px);color:#aab1c4;max-width:330px;line-height:1.5}
+.meter{width:min(230px,35vw);text-align:right}
+.meter-label{font:10px 'DM Mono',monospace;color:#9ba5bd;letter-spacing:.15em}
+.meter strong{display:block;font-size:clamp(28px,4vw,48px);letter-spacing:-.06em;color:#e8ff55}
+.bar{height:5px;background:#262b3b;border-radius:9px;margin-top:9px;overflow:hidden}
+.bar i{display:block;width:100%;height:100%;background:#e8ff55;transform-origin:left;animation:pulse 2s ease-in-out infinite alternate}
+@keyframes pulse{from{transform:scaleX(.72)}to{transform:scaleX(1)}}
+@media(max-width:600px){.hud{padding:22px}.top{display:block}.tag{display:inline-block;margin-top:20px}h1{font-size:clamp(46px,14vw,76px)}.bottom{align-items:end}.caption{max-width:180px}.meter{width:130px}}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div class="hud">
+ <div class="top">
+  <div><div class="kicker">A completely unnecessary experiment</div><h1>WHAT IF<br>IT WAS<br><span>2X MORE?</span></h1></div>
+  <div class="tag">HYPOTHETICAL LAB / 001</div>
+ </div>
+ <div class="bottom">
+  <div class="caption">Nobody asked for this simulation.<br>We made it anyway.</div>
+  <div class="meter"><div class="meter-label">FLOW INTENSITY</div><strong>200%</strong><div class="bar"><i></i></div></div>
+ </div>
+</div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+const host=document.querySelector('#scene');
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x090b13);scene.fog=new THREE.Fog(0x090b13,9,22);
+const camera=new THREE.PerspectiveCamera(34,innerWidth/innerHeight,.1,100);camera.position.set(6,5.1,8.5);camera.lookAt(0,1.45,0);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.25;host.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xb9d5ff,0x17101d,2));
+const key=new THREE.DirectionalLight(0xffffff,3.5);key.position.set(4,8,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);scene.add(key);
+const pink=new THREE.PointLight(0xff4d9a,18,10);pink.position.set(-4,3,1);scene.add(pink);
+const lime=new THREE.PointLight(0xdfff57,15,8);lime.position.set(2,4,-3);scene.add(lime);
+const mat=(color,metalness=0,roughness=.35)=>new THREE.MeshStandardMaterial({color,metalness,roughness});
+const porcelain=mat(0xf0f2f6,.08,.19), dark=mat(0x171c2a,.25,.3), chrome=mat(0x9ca9bc,.85,.18), floorMat=mat(0x151a28,.25,.55);
+const floor=new THREE.Mesh(new THREE.CircleGeometry(20,80),floorMat);floor.rotation.x=-Math.PI/2;floor.position.y=-.04;floor.receiveShadow=true;scene.add(floor);
+const grid=new THREE.GridHelper(30,40,0x343b50,0x202638);grid.position.y=-.025;scene.add(grid);
+const toilet=new THREE.Group();scene.add(toilet);
+const base=new THREE.Mesh(new THREE.CylinderGeometry(.62,.78,1.45,48,1,true),porcelain);base.position.set(0,.78,0);base.castShadow=true;base.receiveShadow=true;toilet.add(base);
+const foot=new THREE.Mesh(new THREE.CylinderGeometry(.65,.68,.18,48),porcelain);foot.position.y=.12;foot.castShadow=true;toilet.add(foot);
+const bowl=new THREE.Mesh(new THREE.SphereGeometry(1,64,40),porcelain);bowl.scale.set(1.08,.48,1.2);bowl.position.set(0,1.55,0);bowl.castShadow=true;bowl.receiveShadow=true;toilet.add(bowl);
+const hole=new THREE.Mesh(new THREE.CylinderGeometry(.66,.72,.12,64),dark);hole.scale.z=1.02;hole.position.set(0,1.72,0);toilet.add(hole);
+const waterMat=new THREE.MeshPhysicalMaterial({color:0xd9ff58,roughness:.12,metalness:.05,transparent:true,opacity:.86,clearcoat:1,clearcoatRoughness:.08});
+const water=new THREE.Mesh(new THREE.CircleGeometry(.57,64),waterMat);water.rotation.x=-Math.PI/2;water.scale.set(1,1.08,1);water.position.set(0,1.79,0);toilet.add(water);
+const rim=new THREE.Mesh(new THREE.TorusGeometry(.79,.105,20,80),porcelain);rim.rotation.x=Math.PI/2;rim.scale.set(1,1.12,1);rim.position.set(0,1.72,0);rim.castShadow=true;toilet.add(rim);
+const tank=new THREE.Mesh(new THREE.BoxGeometry(1.48,1.45,.48),porcelain);tank.position.set(0,2.6,-.9);tank.castShadow=true;tank.receiveShadow=true;toilet.add(tank);
+const tankTop=new THREE.Mesh(new THREE.BoxGeometry(1.56,.12,.55),porcelain);tankTop.position.set(0,3.38,-.9);toilet.add(tankTop);
+const button=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.035,32),chrome);button.position.set(0,3.47,-.9);toilet.add(button);
+const pipe=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.55,24),chrome);pipe.position.set(0,2.08,-.9);toilet.add(pipe);
+// Stylized, abstract golden stream: no person is shown.
+const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(.1,5.3,.05),new THREE.Vector3(.02,4.7,.02),new THREE.Vector3(-.12,3.8,0),new THREE.Vector3(.08,2.8,.02),new THREE.Vector3(0,1.91,0)]);
+const streamGeo=new THREE.TubeGeometry(curve,90,.105,16,false);const streamMat=new THREE.MeshPhysicalMaterial({color:0xe7ff45,emissive:0x526000,emissiveIntensity:.28,roughness:.12,metalness:.02,transparent:true,opacity:.88,clearcoat:1});const stream=new THREE.Mesh(streamGeo,streamMat);scene.add(stream);
+const streamGlow=new THREE.Mesh(new THREE.TubeGeometry(curve,90,.19,12,false),new THREE.MeshBasicMaterial({color:0xdfff42,transparent:true,opacity:.12,side:THREE.DoubleSide}));scene.add(streamGlow);
+const drops=new THREE.Group();scene.add(drops);const dropGeo=new THREE.SphereGeometry(1,12,10);const dropMat=new THREE.MeshStandardMaterial({color:0xe8ff4b,emissive:0x637000,emissiveIntensity:.35,roughness:.12});
+const dropData=[];for(let i=0;i<38;i++){const m=new THREE.Mesh(dropGeo,dropMat);const s=.035+Math.random()*.055;m.scale.set(s,s*(1.2+Math.random()),s);drops.add(m);dropData.push({mesh:m,phase:Math.random()*Math.PI*2,speed:.65+Math.random()*.65,r:.2+Math.random()*.55});}
+const rings=[];for(let i=0;i<4;i++){const m=new THREE.Mesh(new THREE.TorusGeometry(.25+i*.12,.018,8,64),new THREE.MeshBasicMaterial({color:0xe6ff55,transparent:true,opacity:.45-i*.07}));m.rotation.x=Math.PI/2;m.position.y=1.86+i*.005;toilet.add(m);rings.push(m);}
+const splashGroup=new THREE.Group();scene.add(splashGroup);const splashGeo=new THREE.SphereGeometry(1,12,10);const splashMat=new THREE.MeshStandardMaterial({color:0xeaff61,emissive:0x526000,emissiveIntensity:.4,roughness:.16});
+const splashes=[];for(let i=0;i<28;i++){const m=new THREE.Mesh(splashGeo,splashMat);const s=.035+Math.random()*.055;m.scale.set(s,s*1.8,s);splashGroup.add(m);splashes.push({mesh:m,a:Math.random()*Math.PI*2,r:.28+Math.random()*.8,h:.2+Math.random()*.9,phase:Math.random()*Math.PI*2});}
+const platform=new THREE.Mesh(new THREE.CylinderGeometry(2.15,2.15,.16,80),mat(0x202638,.4,.3));platform.position.y=-.12;platform.receiveShadow=true;platform.castShadow=true;scene.add(platform);
+const ringBase=new THREE.Mesh(new THREE.TorusGeometry(2.12,.025,10,100),new THREE.MeshBasicMaterial({color:0xe2ff55,transparent:true,opacity:.7}));ringBase.rotation.x=Math.PI/2;ringBase.position.y=-.025;scene.add(ringBase);
+const clock=new THREE.Clock();
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();
+ toilet.rotation.y=Math.sin(t*.28)*.055;toilet.position.y=Math.sin(t*1.2)*.035;
+ stream.scale.x=1+.07*Math.sin(t*5);streamGlow.scale.x=stream.scale.x;
+ water.scale.set(1+.045*Math.sin(t*5),1+.055*Math.cos(t*4),1);
+ rings.forEach((r,i)=>{const p=(t*.55+i*.25)%1;r.scale.setScalar(.65+p*1.7);r.material.opacity=(1-p)*.42;});
+ dropData.forEach(d=>{const p=(t*d.speed+d.phase)%(Math.PI*2);d.mesh.position.set(Math.sin(p*1.3)*d.r*.45,2.05+(p/(Math.PI*2))*3.15,Math.cos(p)*d.r*.4);});
+ splashes.forEach(s=>{const p=(t*.85+s.phase)%(Math.PI*2);s.mesh.position.set(Math.cos(s.a)*s.r,1.85+Math.abs(Math.sin(p))*s.h,Math.sin(s.a)*s.r);s.mesh.scale.y=.03+Math.abs(Math.sin(p))*.09;});
+ camera.position.x=6+Math.sin(t*.18)*.25;camera.lookAt(0,1.85,0);renderer.render(scene,camera);}
+animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body></html>
